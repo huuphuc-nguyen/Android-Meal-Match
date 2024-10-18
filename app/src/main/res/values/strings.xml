@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Meal Match</string>
+    <string name="btn_login">Log in</string>
 </resources>
