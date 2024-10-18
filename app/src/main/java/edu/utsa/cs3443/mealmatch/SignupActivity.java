@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -16,63 +15,55 @@ import androidx.core.view.WindowInsetsCompat;
 
 import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
-public class LoginActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signup);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
 
-        Button btn_login = findViewById(R.id.btn_login);
+        Button btn_signup = findViewById(R.id.btn_signup);
 
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btn_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
-            }
-        });
-
-        TextView txt_signup = findViewById(R.id.txt_signin);
-
-        txt_signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchSingupActivity();
+                signup();
             }
         });
     }
 
-    private void login(){
+    private void signup(){
+        // Get user input
+        EditText txt_firstname = findViewById(R.id.txt_firstname);
+        EditText txt_lastname = findViewById(R.id.txt_lastname);
         EditText txt_email = findViewById(R.id.txt_email);
         EditText txt_password = findViewById(R.id.txt_password);
+        EditText txt_confirm_password = findViewById(R.id.txt_confirm_password);
 
+        String firstname = txt_firstname.getText().toString().trim();
+        String lastname = txt_lastname.getText().toString().trim();
         String email = txt_email.getText().toString().trim();
         String password = txt_password.getText().toString().trim();
+        String confirmPassword = txt_confirm_password.getText().toString().trim();
 
-        boolean isLoginSuccess = UserManager.getInstance().login(email,password);
-
-        if(isLoginSuccess){
-            UserManager.getInstance().loadUserData();
-            launchMainActivity();
-        }
-        else{
-            Toast.makeText(getApplicationContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
+        if (!password.equals(confirmPassword)){
+            Toast.makeText(getApplicationContext(),"ConfirmPassword must match Password", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(getApplicationContext(),"Create account successfully.", Toast.LENGTH_SHORT).show();
+            UserManager.getInstance().addNewUser(email, password, firstname, lastname);
+            launchLoginActivity();
         }
     }
 
-    private void launchMainActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+    private void launchLoginActivity(){
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-    }
-
-    private void launchSingupActivity(){
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
+        finish();
     }
 }

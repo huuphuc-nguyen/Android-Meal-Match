@@ -29,7 +29,6 @@ public class UserManager {
         if(email.equals("admin") && password.equals("123")){
             // TODO: add logic logging in user
             this.user = new User(email, password);
-            loadUserData();
             return true;
         }
         else{
@@ -39,11 +38,15 @@ public class UserManager {
 
     public void loadUserData(){
         if (this.user != null){
-            // TODO: Load user data
+            // TODO: Load user data, firstname lastname
         }
         else{
             Log.e(Constant.LOG_AUTH,"No user logged in");
         }
+    }
+
+    public void addNewUser(String email, String password, String firstname, String lastname){
+        // TODO: Add user to database
     }
 
     public void logout(){
