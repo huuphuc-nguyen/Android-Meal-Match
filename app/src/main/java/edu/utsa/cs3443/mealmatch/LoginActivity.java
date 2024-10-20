@@ -58,7 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         boolean isLoginSuccess = UserManager.getInstance().login(email,password);
 
         if(isLoginSuccess){
-            UserManager.getInstance().loadUserData();
             launchMainActivity();
         }
         else{

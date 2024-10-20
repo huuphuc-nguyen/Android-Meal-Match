@@ -2,6 +2,7 @@ package edu.utsa.cs3443.mealmatch.utils;
 
 import android.util.Log;
 
+import edu.utsa.cs3443.mealmatch.data.DataManager;
 import edu.utsa.cs3443.mealmatch.model.User;
 
 public class UserManager {
@@ -26,27 +27,21 @@ public class UserManager {
     }
 
     public boolean login(String email, String password){
-        if(email.equals("admin") && password.equals("123")){
-            // TODO: add logic logging in user
-            this.user = new User(email, password);
-            return true;
+
+        for (User user: DataManager.getInstance().getUsers()){
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)){
+                return true;
+            }
         }
-        else{
-            return false;
-        }
+
+        return false;
     }
 
-    public void loadUserData(){
-        if (this.user != null){
-            // TODO: Load user data, firstname lastname
-        }
-        else{
-            Log.e(Constant.LOG_AUTH,"No user logged in");
-        }
-    }
 
     public void addNewUser(String email, String password, String firstname, String lastname){
-        // TODO: Add user to database
+        User newUser = new User(email, password, firstname, lastname);
+
+        DataManager.getInstance().writeUser(newUser);
     }
 
     public void logout(){
