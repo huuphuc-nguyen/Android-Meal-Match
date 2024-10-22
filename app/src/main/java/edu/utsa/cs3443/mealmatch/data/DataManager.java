@@ -93,4 +93,24 @@ public class DataManager {
     public GroceryList getGroceryListById(int id){
 
     }
+
+    public void updateUserData(){
+
+    }
+
+    public void writeUserFile(){
+
+    }
+
+    public void writeTaskFile(){
+
+    }
+
+    public void writeGroceryListFile(){
+
+    }
+
+    public void writeMealPlannerFile(){
+
+    }
 }
