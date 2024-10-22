@@ -75,19 +75,19 @@ public class DataManager {
     }
 
     public User getUserByEmail(String email){
-
+        return null;
     }
 
     public Dish getDishById(int id){
-
+        return null;
     }
 
     public MealPlan getMealPlanById(int id){
-
+        return null;
     }
 
     public Task getTaskById(int id){
-
+        return null;
     }
 
     public GroceryList getGroceryListById(int id){
