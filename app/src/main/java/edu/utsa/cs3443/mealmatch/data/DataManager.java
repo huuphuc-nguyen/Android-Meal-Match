@@ -91,7 +91,7 @@ public class DataManager {
     }
 
     public GroceryList getGroceryListById(int id){
-
+        return null;
     }
 
     public void updateUserData(){
