@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void tempNavigationHandle(){
-        Button btn_fav = findViewById(R.id.btn_favoriteDish);
-        Button btn_plan = findViewById(R.id.btn_mealPlanner);
-        Button btn_list = findViewById(R.id.btn_groceryList);
+        ImageButton btn_fav = findViewById(R.id.btn_favoriteDish);
+        ImageButton btn_plan = findViewById(R.id.btn_mealPlanner);
+        ImageButton btn_list = findViewById(R.id.btn_groceryList);
 
         btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
