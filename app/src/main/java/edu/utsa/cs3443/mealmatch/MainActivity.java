@@ -1,6 +1,9 @@
 package edu.utsa.cs3443.mealmatch;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +20,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
+        });
+
+        tempNavigationHandle();
+    }
+
+    private void tempNavigationHandle(){
+        Button btn_fav = findViewById(R.id.btn_favoriteDish);
+        Button btn_plan = findViewById(R.id.btn_mealPlanner);
+        Button btn_list = findViewById(R.id.btn_groceryList);
+
+        btn_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, FavoriteDishesActivity.class));
+            }
+        });
+
+        btn_plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MealPlannerActivity.class));
+            }
+        });
+
+        btn_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, GroceryListActivity.class));
+            }
         });
     }
 }
