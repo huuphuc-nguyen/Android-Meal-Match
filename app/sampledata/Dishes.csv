@@ -1,0 +1,6 @@
+ID, name, description, imgUrl, calories, proteins, carb, fat, ingredients,
+1, taco, taco for breakfast, https://i.pinimg.com/564x/2f/8f/bd/2f8fbd88f439fead732e62c7dfe788e4.jpg, 200 cal, 20g, 10g, 10g, 1 cup of flour;2 tbsp oil;100g meat
+2, pizza, classic pepperoni pizza, https://i.pinimg.com/564x/f4/c3/47/f4c3479b86417ada0b7a8949711ed473.jpg, 300 cal, 15g, 40g, 12g, 2 cups of flour;200g cheese;50g pepperoni
+3, salad, fresh garden salad, https://i.pinimg.com/564x/56/fb/3f/56fb3f0a81ab2a5fef185f774365ef82.jpg, 150 cal, 5g, 20g, 5g, 1 cup lettuce;1 tomato;2 tbsp olive oil
+4, burger, beef cheeseburger, https://i.pinimg.com/736x/4a/9e/b5/4a9eb54e61026b01b186d5dd869a19df.jpg, 450 cal, 25g, 30g, 20g, 1 bun;150g beef patty;2 slices cheese
+5, smoothie, berry smoothie, https://i.pinimg.com/564x/3d/6b/df/3d6bdf4a7d3866218975e46eb96a3aea.jpg, 180 cal, 10g, 30g, 5g, 1 cup of mixed berries;1 banana;1/2 cup yogurt

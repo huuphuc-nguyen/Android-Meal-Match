@@ -1,5 +1,9 @@
 package edu.utsa.cs3443.mealmatch.model;
 
+import android.annotation.SuppressLint;
+
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 public class Dish {
@@ -7,13 +11,13 @@ public class Dish {
     private String name;
     private String description;
     private String imageUrl;
-    private ArrayList<String> ingredients;
     private String calories;
     private String protein;
     private String carb;
     private String fat;
+    private ArrayList<String> ingredients;
 
-    public Dish(int ID, String name, String description, String imageUrl, ArrayList<String> ingredients, String calories, String protein, String carb, String fat) {
+    public Dish(int ID, String name, String description, String imageUrl, String calories, String protein, String carb, String fat, ArrayList<String> ingredients) {
         this.ID = ID;
         this.name = name;
         this.description = description;
@@ -96,4 +100,25 @@ public class Dish {
     public void setFat(String fat) {
         this.fat = fat;
     }
+
+    @NonNull
+    @SuppressLint("DefaultLocale")
+    @Override
+    public String toString() {
+        // Join ingredients with a semicolon
+        String ingredientsString = String.join(";", ingredients);
+
+        // Format the Dish information as a single string
+        return String.format("%d, %s, %s, %s, %s, %s, %s, %s, %s",
+                ID,
+                name,
+                description,
+                imageUrl,
+                calories,
+                protein,
+                carb,
+                fat,
+                ingredientsString);
+    }
+
 }

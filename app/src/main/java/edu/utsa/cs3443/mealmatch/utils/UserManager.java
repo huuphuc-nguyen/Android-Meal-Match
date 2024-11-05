@@ -1,5 +1,6 @@
 package edu.utsa.cs3443.mealmatch.utils;
 
+import android.content.Context;
 import android.util.Log;
 
 import edu.utsa.cs3443.mealmatch.data.DataManager;
@@ -38,10 +39,10 @@ public class UserManager {
     }
 
 
-    public void addNewUser(String email, String password, String firstname, String lastname){
+    public void addNewUser(String email, String password, String firstname, String lastname, Context context){
         User newUser = new User(email, password, firstname, lastname);
 
-        DataManager.getInstance().writeUser(newUser);
+        DataManager.getInstance().writeUser(newUser, context);
     }
 
     public void logout(){
