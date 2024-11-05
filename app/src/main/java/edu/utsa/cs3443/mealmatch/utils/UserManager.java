@@ -1,6 +1,7 @@
 package edu.utsa.cs3443.mealmatch.utils;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import edu.utsa.cs3443.mealmatch.data.DataManager;
@@ -31,8 +32,11 @@ public class UserManager {
 
         for (User user: DataManager.getInstance().getUsers()){
             if (user.getEmail().equals(email) && user.getPassword().equals(password)){
+
+                // Get current user data
                 User current_user = DataManager.getInstance().getUserByEmail(email);
                 setUser(current_user);
+
                 return true;
             }
         }
@@ -44,7 +48,8 @@ public class UserManager {
     public void addNewUser(String email, String password, String firstname, String lastname, Context context){
         User newUser = new User(email, password, firstname, lastname);
 
-        DataManager.getInstance().writeUser(newUser, context);
+        DataManager.getInstance().addUserToList(newUser);
+        DataManager.getInstance().saveUserData(context);
     }
 
     public void logout(){
