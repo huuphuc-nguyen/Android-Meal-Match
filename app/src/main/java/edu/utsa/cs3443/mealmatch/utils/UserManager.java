@@ -31,6 +31,8 @@ public class UserManager {
 
         for (User user: DataManager.getInstance().getUsers()){
             if (user.getEmail().equals(email) && user.getPassword().equals(password)){
+                User current_user = DataManager.getInstance().getUserByEmail(email);
+                setUser(current_user);
                 return true;
             }
         }
