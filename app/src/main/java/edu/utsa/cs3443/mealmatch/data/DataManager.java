@@ -173,10 +173,20 @@ public class DataManager {
     }
 
     public User getUserByEmail(String email){
+        for (User user : Users) {
+            if (user.getEmail().equalsIgnoreCase(email.trim())) {
+                return user;
+            }
+        }
         return null;
     }
 
     public Dish getDishById(int id){
+        for (Dish dish : Dishes) {
+            if (dish.getID() == id) {
+                return dish;
+            }
+        }
         return null;
     }
 
