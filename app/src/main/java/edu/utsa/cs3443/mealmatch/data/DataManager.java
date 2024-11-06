@@ -71,6 +71,10 @@ public class DataManager {
 
         // Load grocery lists file
         loadGroceryListsFile(context);
+
+        // Load task file
+
+        // Load meal plan file
     }
 
     // READING FILE FUNCTIONS
@@ -162,6 +166,35 @@ public class DataManager {
                 GroceryList groceryList = new GroceryList(id,tasks);
                 this.GroceryLists.add(groceryList);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadTasksFile(Context context){
+        String filename = Constant.TASKS_FILE;
+        try {
+            InputStream is = context.openFileInput(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String line;
+
+            // Skip header line
+            reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                String[] columns = line.split(",");
+
+                // Parse columns
+                int id = Integer.parseInt(columns[0].trim());
+                String name = columns[1].trim();
+                String type = columns[2].trim();
+                boolean isDone = columns[3].trim().equals("1");
+
+                // Create Task object
+                Task task = new Task(id, name, type, isDone);
+                Tasks.add(task);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -267,8 +300,8 @@ public class DataManager {
             data.append("Id, TasksId").append("\n");
 
             // Build the data string from all users in the list
-            for (User user : Users) {
-                data.append(user.toString()).append("\n");
+            for (GroceryList groceryList : GroceryLists) {
+                data.append(groceryList.toString()).append("\n");
             }
 
             // Write the entire string to the file at once

@@ -1,5 +1,7 @@
 package edu.utsa.cs3443.mealmatch.model;
 
+import androidx.annotation.NonNull;
+
 public class Task {
     private int ID;
     private String name;
@@ -52,5 +54,12 @@ public class Task {
 
     public static void setIDCounter(int IDCounter) {
         Task.IDCounter = IDCounter;
+    }
+
+    // toString method for CSV format
+    @NonNull
+    @Override
+    public String toString() {
+        return ID + ", " + name + ", " + type + ", " + (isDone ? 1 : 0);
     }
 }
