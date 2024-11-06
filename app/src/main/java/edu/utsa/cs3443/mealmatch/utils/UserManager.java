@@ -44,7 +44,6 @@ public class UserManager {
         return false;
     }
 
-
     public void addNewUser(String email, String password, String firstname, String lastname, Context context){
         User newUser = new User(email, password, firstname, lastname);
 

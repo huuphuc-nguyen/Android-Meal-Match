@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.zip.CheckedInputStream;
 
@@ -67,8 +68,12 @@ public class DataManager {
 
         // Load dishes file
         loadDishesFile(context);
+
+        // Load grocery lists file
+        loadGroceryListsFile(context);
     }
 
+    // READING FILE FUNCTIONS
     private void loadUsersFile(Context context){
         String filename = Constant.USERS_FILE;
         try {
@@ -80,7 +85,7 @@ public class DataManager {
             reader.readLine();
 
             while((line = reader.readLine()) != null){
-                String columns[] = line.split(",");
+                String[] columns = line.split(",");
 
                 // Parse columns
                 String email = columns[0].trim();
@@ -114,7 +119,7 @@ public class DataManager {
             reader.readLine();
 
             while ((line = reader.readLine()) != null) {
-                String columns[] = line.split(",");
+                String[] columns = line.split(",");
 
                 // Parse columns
                 int id = Integer.parseInt(columns[0].trim());
@@ -136,22 +141,51 @@ public class DataManager {
         }
     }
 
+    private void loadGroceryListsFile(Context context){
+        String filename = Constant.GROCERY_LIST_FILE;
+        try {
+            InputStream is = context.openFileInput(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String line;
+
+            // Skip header
+            reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                String[] columns = line.split(",");
+
+                // Parse columns
+                int id = Integer.parseInt(columns[0].trim());
+
+                ArrayList<Integer> tasks = HelperFunctions.parseIntegerList(columns[1].trim(), ";");
+
+                GroceryList groceryList = new GroceryList(id,tasks);
+                this.GroceryLists.add(groceryList);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ADD TO ARRAYLIST FUNCTIONS
+
     public void addUserToList(User user){
         this.Users.add(user);
     }
 
-    public void writeMealPlan(MealPlan mealPlan){
-
+    public void addMealPlan(MealPlan mealPlan){
+        this.MealPlans.add(mealPlan);
     }
 
-    public void writeTask(Task task){
-
+    public void addTask(Task task){
+        this.Tasks.add(task);
     }
 
-    public void writeGroceryList(GroceryList groceryList){
-
+    public void addGroceryList(GroceryList groceryList){
+        this.GroceryLists.add(groceryList);
     }
 
+    // GET ELEMENT WITH ID
     public User getUserByEmail(String email){
         for (User user : Users) {
             if (user.getEmail().equalsIgnoreCase(email.trim())) {
@@ -171,17 +205,33 @@ public class DataManager {
     }
 
     public MealPlan getMealPlanById(int id){
+        for (MealPlan mealPlan : MealPlans){
+            if (mealPlan.getID() == id){
+                return mealPlan;
+            }
+        }
         return null;
     }
 
     public Task getTaskById(int id){
+        for (Task task : Tasks){
+            if(task.getID() == id){
+                return task;
+            }
+        }
         return null;
     }
 
     public GroceryList getGroceryListById(int id){
+        for (GroceryList groceryList : GroceryLists){
+            if (groceryList.getID() == id){
+                return  groceryList;
+            }
+        }
         return null;
     }
 
+    // SAVE ARRAYLIST TO FILES
     public void saveUserData(Context context){
         String filename = Constant.USERS_FILE;
 
@@ -204,19 +254,33 @@ public class DataManager {
         }
     }
 
-    public void writeUserFile(){
+    public void saveTaskData(){
 
     }
 
-    public void writeTaskFile(){
+    public void saveGroceryListData(Context context){
+        String filename = Constant.GROCERY_LIST_FILE;
 
+        try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
+            StringBuilder data = new StringBuilder();
+
+            data.append("Id, TasksId").append("\n");
+
+            // Build the data string from all users in the list
+            for (User user : Users) {
+                data.append(user.toString()).append("\n");
+            }
+
+            // Write the entire string to the file at once
+            fos.write(data.toString().getBytes());
+            fos.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void writeGroceryListFile(){
-
-    }
-
-    public void writeMealPlannerFile(){
+    public void saveMealPlannerData(){
 
     }
 }

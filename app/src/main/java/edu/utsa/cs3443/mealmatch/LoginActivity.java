@@ -17,6 +17,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import edu.utsa.cs3443.mealmatch.data.DataManager;
 import edu.utsa.cs3443.mealmatch.model.Dish;
+import edu.utsa.cs3443.mealmatch.model.GroceryList;
+import edu.utsa.cs3443.mealmatch.model.Task;
 import edu.utsa.cs3443.mealmatch.model.User;
 import edu.utsa.cs3443.mealmatch.utils.UserManager;
 

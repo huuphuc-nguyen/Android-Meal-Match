@@ -1,6 +1,11 @@
 package edu.utsa.cs3443.mealmatch.model;
 
+import android.annotation.SuppressLint;
+
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class GroceryList {
     private int ID;
@@ -34,5 +39,19 @@ public class GroceryList {
 
     public static void setIDCounter(int IDCounter) {
         GroceryList.IDCounter = IDCounter;
+    }
+
+    @NonNull
+    @SuppressLint("DefaultLocale")
+    @Override
+    public String toString() {
+
+        String tasksString = tasks.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(";"));
+
+        // Format as CSV
+        return String.format("%d, %s",
+                ID, tasksString);
     }
 }
