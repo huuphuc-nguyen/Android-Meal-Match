@@ -299,7 +299,7 @@ public class DataManager {
     }
 
     // SAVE ARRAYLIST TO FILES
-    public void saveUserData(Context context){
+    private void saveUserData(Context context){
         String filename = Constant.USERS_FILE;
 
         try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
@@ -321,7 +321,7 @@ public class DataManager {
         }
     }
 
-    public void saveTaskData(Context context){
+    private void saveTaskData(Context context){
         String filename = Constant.TASKS_FILE;
 
         try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
@@ -342,7 +342,7 @@ public class DataManager {
         }
     }
 
-    public void saveGroceryListData(Context context){
+    private void saveGroceryListData(Context context){
         String filename = Constant.GROCERY_LIST_FILE;
 
         try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
@@ -363,7 +363,7 @@ public class DataManager {
         }
     }
 
-    public void saveMealPlanData(Context context){
+    private void saveMealPlanData(Context context){
         String filename = Constant.MEAL_PLANS_FILE;
 
         try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
