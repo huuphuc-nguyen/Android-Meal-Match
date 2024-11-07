@@ -1,6 +1,9 @@
 package edu.utsa.cs3443.mealmatch.utils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HelperFunctions {
     public static ArrayList<Integer> parseIntegerList(String data, String delimiter) {
@@ -23,5 +26,15 @@ public class HelperFunctions {
             }
         }
         return list;
+    }
+
+    public static Date parseDate(String dateStr) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+        try {
+            return formatter.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

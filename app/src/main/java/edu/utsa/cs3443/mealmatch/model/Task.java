@@ -7,7 +7,6 @@ public class Task {
     private String name;
     private String type;
     private boolean isDone;
-    private static int IDCounter;
 
     public Task(int ID, String name, String type, boolean isDone) {
         this.ID = ID;
@@ -46,14 +45,6 @@ public class Task {
 
     public void setDone(boolean done) {
         isDone = done;
-    }
-
-    public static int getIDCounter() {
-        return IDCounter;
-    }
-
-    public static void setIDCounter(int IDCounter) {
-        Task.IDCounter = IDCounter;
     }
 
     // toString method for CSV format

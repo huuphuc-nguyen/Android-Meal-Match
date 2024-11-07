@@ -4,7 +4,10 @@ import android.content.Context;
 import android.provider.ContactsContract;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import edu.utsa.cs3443.mealmatch.data.DataManager;
+import edu.utsa.cs3443.mealmatch.model.GroceryList;
 import edu.utsa.cs3443.mealmatch.model.User;
 
 public class UserManager {
@@ -47,8 +50,16 @@ public class UserManager {
     public void addNewUser(String email, String password, String firstname, String lastname, Context context){
         User newUser = new User(email, password, firstname, lastname);
 
-        DataManager.getInstance().addUserToList(newUser);
-        DataManager.getInstance().saveUserData(context);
+        // Create new grocery list for new account
+        int newID = DataManager.getInstance().getNextGroceryListID();
+        ArrayList<Integer> tasks = new ArrayList<>();
+        tasks.add(0);
+        GroceryList newList = new GroceryList(newID, tasks);
+        newUser.setGroceryID(newID);
+
+        // Update data and save to file
+        DataManager.getInstance().addGroceryList(newList, context);
+        DataManager.getInstance().addUserToList(newUser, context);
     }
 
     public void logout(){

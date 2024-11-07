@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class GroceryList {
     private int ID;
     private ArrayList<Integer> tasks;
-    private static int IDCounter;
 
     public GroceryList(int ID, ArrayList<Integer> tasks) {
         this.ID = ID;
@@ -31,14 +30,6 @@ public class GroceryList {
 
     public void setTasks(ArrayList<Integer> tasks) {
         this.tasks = tasks;
-    }
-
-    public static int getIDCounter() {
-        return IDCounter;
-    }
-
-    public static void setIDCounter(int IDCounter) {
-        GroceryList.IDCounter = IDCounter;
     }
 
     @NonNull

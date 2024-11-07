@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ConnectException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.zip.CheckedInputStream;
 
 import edu.utsa.cs3443.mealmatch.model.User;
@@ -73,8 +74,10 @@ public class DataManager {
         loadGroceryListsFile(context);
 
         // Load task file
+        loadTasksFile(context);
 
         // Load meal plan file
+        loadMealPlanFile(context);
     }
 
     // READING FILE FUNCTIONS
@@ -200,22 +203,53 @@ public class DataManager {
         }
     }
 
+    public void loadMealPlanFile(Context context){
+        String filename = Constant.MEAL_PLANS_FILE;
+        try {
+            InputStream is = context.openFileInput(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String line;
+
+            // Skip header line
+            reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                String[] columns = line.split(",");
+
+                // Parse columns
+                int id = Integer.parseInt(columns[0].trim());
+                Date planDate = HelperFunctions.parseDate(columns[1].trim()); // Parse date using helper
+                ArrayList<Integer> dishesID = HelperFunctions.parseIntegerList(columns[2].trim(), ";");
+
+                // Create MealPlan object
+                MealPlan mealPlan = new MealPlan(id, planDate, dishesID);
+                MealPlans.add(mealPlan);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     // ADD TO ARRAYLIST FUNCTIONS
 
-    public void addUserToList(User user){
+    public void addUserToList(User user, Context context){
         this.Users.add(user);
+        saveUserData(context);
     }
 
-    public void addMealPlan(MealPlan mealPlan){
+    public void addMealPlan(MealPlan mealPlan, Context context){
         this.MealPlans.add(mealPlan);
+        saveMealPlanData(context);
     }
 
-    public void addTask(Task task){
+    public void addTask(Task task, Context context){
         this.Tasks.add(task);
+        saveTaskData(context);
     }
 
-    public void addGroceryList(GroceryList groceryList){
+    public void addGroceryList(GroceryList groceryList, Context context){
         this.GroceryLists.add(groceryList);
+        saveGroceryListData(context);
     }
 
     // GET ELEMENT WITH ID
@@ -287,8 +321,25 @@ public class DataManager {
         }
     }
 
-    public void saveTaskData(){
+    public void saveTaskData(Context context){
+        String filename = Constant.TASKS_FILE;
 
+        try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
+            StringBuilder data = new StringBuilder();
+
+            data.append("Id, name, type, isDone").append("\n");
+
+            for (Task task : Tasks) {
+                data.append(task.toString()).append("\n");
+            }
+
+            // Write the entire string to the file at once
+            fos.write(data.toString().getBytes());
+            fos.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveGroceryListData(Context context){
@@ -299,7 +350,6 @@ public class DataManager {
 
             data.append("Id, TasksId").append("\n");
 
-            // Build the data string from all users in the list
             for (GroceryList groceryList : GroceryLists) {
                 data.append(groceryList.toString()).append("\n");
             }
@@ -313,7 +363,60 @@ public class DataManager {
         }
     }
 
-    public void saveMealPlannerData(){
+    public void saveMealPlanData(Context context){
+        String filename = Constant.MEAL_PLANS_FILE;
 
+        try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
+            StringBuilder data = new StringBuilder();
+
+            data.append("ID, planDate, dishID").append("\n");
+
+            for (MealPlan mealPlan : MealPlans) {
+                data.append(mealPlan.toString()).append("\n");
+            }
+
+            // Write the entire string to the file at once
+            fos.write(data.toString().getBytes());
+            fos.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ID generator
+
+    public int getNextGroceryListID() {
+        if (GroceryLists.isEmpty()) {
+            return 1; // Start IDs from 1 if the list is empty
+        }
+
+        // Find the maximum ID in the current list
+        return GroceryLists.stream()
+                .mapToInt(GroceryList::getID)
+                .max()
+                .orElse(0) + 1; // Increment the maximum ID by 1
+    }
+
+    public int getNextTaskID() {
+        if (Tasks.isEmpty()) {
+            return 1; // Start IDs from 1 if the list is empty
+        }
+
+        return Tasks.stream()
+                .mapToInt(Task::getID)
+                .max()
+                .orElse(0) + 1;
+    }
+
+    public int getNextMealPlanID() {
+        if (MealPlans.isEmpty()) {
+            return 1; // Start IDs from 1 if the list is empty
+        }
+
+        return MealPlans.stream()
+                .mapToInt(MealPlan::getID)
+                .max()
+                .orElse(0) + 1;
     }
 }
