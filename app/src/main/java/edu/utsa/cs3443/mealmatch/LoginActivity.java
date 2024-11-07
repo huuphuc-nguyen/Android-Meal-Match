@@ -2,6 +2,7 @@ package edu.utsa.cs3443.mealmatch;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,8 +16,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+
 import edu.utsa.cs3443.mealmatch.data.DataManager;
 import edu.utsa.cs3443.mealmatch.model.Dish;
+import edu.utsa.cs3443.mealmatch.model.GroceryList;
+import edu.utsa.cs3443.mealmatch.model.MealPlan;
+import edu.utsa.cs3443.mealmatch.model.Task;
 import edu.utsa.cs3443.mealmatch.model.User;
 import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
@@ -35,6 +45,23 @@ public class LoginActivity extends AppCompatActivity {
 
         // Load all data here
         DataManager.getInstance().loadAllData(this);
+
+        ArrayList<Integer>  a =  new ArrayList<>();
+        a.add(5);
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+        Date planDate = null;
+        try {
+            planDate = formatter.parse("11-06-2024");
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        MealPlan mealPlan  = new MealPlan(1, planDate, a );
+
+        DataManager.getInstance().addMealPlan(mealPlan, this);
+
+        for (MealPlan m : DataManager.getInstance().getMealPlans()){
+            Log.e("TAG", m.toString());
+        }
 
         Button btn_login = findViewById(R.id.btn_login);
 

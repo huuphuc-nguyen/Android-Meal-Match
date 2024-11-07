@@ -57,8 +57,10 @@ public class SignupActivity extends AppCompatActivity {
         } else if (firstname.isEmpty() || lastname.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             Toast.makeText(getApplicationContext(),"Fields can not be empty", Toast.LENGTH_SHORT).show();
         } else{
+
             // Need context to write file
             UserManager.getInstance().addNewUser(email, password, firstname, lastname, this);
+
             Toast.makeText(getApplicationContext(),"Create account successfully.", Toast.LENGTH_SHORT).show();
             launchLoginActivity();
         }

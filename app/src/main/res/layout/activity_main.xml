@@ -7,6 +7,60 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- Top Image -->
+    <ImageView
+        android:id="@+id/topImage"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:src="@drawable/background_login"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Semi-transparent overlay -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:background="#80000000"
+        app:layout_constraintTop_toTopOf="@id/topImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ScrollView for middle content -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/topImage"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@color/background_primary">
+
+            <!-- Add your middle section content here -->
+
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="1000dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/label_welcome"
+                android:textColor="@color/emphasize_dark"
+                android:textSize="24sp" />
+
+            <!-- Other elements like EditText, Buttons -->
+        </LinearLayout>
+    </ScrollView>
+
+
+    <!-- Navigation Menu -->
     <View
         android:id="@+id/top_border"
         android:layout_width="match_parent"

@@ -1,11 +1,12 @@
 package edu.utsa.cs3443.mealmatch.model;
 
+import androidx.annotation.NonNull;
+
 public class Task {
     private int ID;
     private String name;
     private String type;
     private boolean isDone;
-    private static int IDCounter;
 
     public Task(int ID, String name, String type, boolean isDone) {
         this.ID = ID;
@@ -46,11 +47,10 @@ public class Task {
         isDone = done;
     }
 
-    public static int getIDCounter() {
-        return IDCounter;
-    }
-
-    public static void setIDCounter(int IDCounter) {
-        Task.IDCounter = IDCounter;
+    // toString method for CSV format
+    @NonNull
+    @Override
+    public String toString() {
+        return ID + ", " + name + ", " + type + ", " + (isDone ? 1 : 0);
     }
 }
