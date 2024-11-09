@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import edu.utsa.cs3443.mealmatch.adapter.RecommendDishAdapter;
 import edu.utsa.cs3443.mealmatch.data.DataManager;
@@ -24,7 +25,7 @@ import edu.utsa.cs3443.mealmatch.utils.UserManager;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecommendDishAdapter dishAdapter;
-    private ArrayList<Dish> dishesList;
+    ArrayList<Dish> dishData = DataManager.getInstance().getDishes();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         tempNavigationHandle();
 
+        initializeRecommendDishes();
+
 //        for (Dish dish : DataManager.getInstance().getDishes()){
 //            if (UserManager.getInstance().getUser().getFavoriteDishes().contains(dish.getID())){
 //                //dishesList.add(dish);
@@ -46,13 +49,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }
 
-        // Initialize RecyclerView
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Initialize Player List and Adapter
-        dishAdapter = new RecommendDishAdapter(this, DataManager.getInstance().getDishes());
-        recyclerView.setAdapter(dishAdapter);
     }
 
     private void tempNavigationHandle(){
@@ -80,5 +76,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, GroceryListActivity.class));
             }
         });
+    }
+
+    private void initializeRecommendDishes(){
+        // Create a clone list, then shuffle, then pick random 5 dishes
+        ArrayList<Dish> cloneArray = new ArrayList<>(dishData);
+        Collections.shuffle(cloneArray);
+        ArrayList<Dish> recommendDishes = new ArrayList<>(cloneArray.subList(0, 5));
+
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        // Initialize Player List and Adapter
+        dishAdapter = new RecommendDishAdapter(this, recommendDishes);
+        recyclerView.setAdapter(dishAdapter);
     }
 }

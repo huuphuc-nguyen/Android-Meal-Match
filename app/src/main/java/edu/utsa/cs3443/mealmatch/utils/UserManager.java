@@ -72,7 +72,7 @@ public class UserManager {
         DataManager.getInstance().updateUser(context);
     }
     public void removeFavoriteDish(int id, Context context){
-        user.getFavoriteDishes().remove(id);
+        user.getFavoriteDishes().remove(Integer.valueOf(id));
         DataManager.getInstance().updateUser(context);
     }
 }

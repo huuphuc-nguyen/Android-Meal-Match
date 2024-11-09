@@ -46,23 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         // Load all data here
         DataManager.getInstance().loadAllData(this);
 
-        ArrayList<Integer>  a =  new ArrayList<>();
-        a.add(5);
-        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
-        Date planDate = null;
-        try {
-            planDate = formatter.parse("11-06-2024");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        MealPlan mealPlan  = new MealPlan(1, planDate, a );
-
-        DataManager.getInstance().addMealPlan(mealPlan, this);
-
-        for (MealPlan m : DataManager.getInstance().getMealPlans()){
-            Log.e("TAG", m.toString());
-        }
-
         Button btn_login = findViewById(R.id.btn_login);
 
         btn_login.setOnClickListener(new View.OnClickListener() {

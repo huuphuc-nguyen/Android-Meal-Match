@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import edu.utsa.cs3443.mealmatch.R;
@@ -40,6 +42,14 @@ public class RecommendDishAdapter extends RecyclerView.Adapter<RecommendDishAdap
 
         // Bind data to views
         holder.txtDishName.setText(dish.getName());
+
+        // Load image using Glide
+        Glide.with(context)
+                .load(dish.getImageUrl()) // Load the image from the URL in the Dish object
+                .placeholder(R.drawable.background_login)
+                .error(R.drawable.background_login)
+                .into(holder.imgDish);
+
         //holder.imgDish.setImageResource(dish.getImageResourceId());  // Assuming you have image resources
         holder.imgFavoriteIcon.setImageResource(isFavorite ? R.drawable.ic_heart_liked : R.drawable.ic_heart_empty);
 

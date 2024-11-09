@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="250dp"
-    android:layout_height="350dp"
+    android:layout_height="300dp"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="8dp"
     app:cardCornerRadius="20dp"
@@ -32,10 +32,10 @@
             android:id="@+id/txt_dish_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             tools:text="Pasta Salad"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:fontFamily="@font/poppins_semibold"
             android:layout_alignParentBottom="true"
             android:padding="10dp" />
@@ -49,8 +49,7 @@
             android:layout_marginEnd="10dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            tools:src="@drawable/ic_heart_empty"
-            app:tint="@android:color/white" />
+            tools:src="@drawable/ic_heart_liked" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
