@@ -384,6 +384,37 @@ public class DataManager {
         }
     }
 
+
+    public void updateUser(Context context){
+        String filename = Constant.USERS_FILE;
+
+        try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
+            StringBuilder data = new StringBuilder();
+
+            data.append("Username, password, first name, last name, favoriteDishes, groceryListID, mealPlans").append("\n");
+
+            // Build the data string from all users in the list
+            for (User user : Users) {
+                data.append(user.toString()).append("\n");
+            }
+
+            // Write the entire string to the file at once
+            fos.write(data.toString().getBytes());
+            fos.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateGroceryList(Context context){
+        // TODO
+    }
+
+    public void updateMealPlan(Context context){
+        // TODO
+    }
+
     // ID generator
 
     public int getNextGroceryListID() {

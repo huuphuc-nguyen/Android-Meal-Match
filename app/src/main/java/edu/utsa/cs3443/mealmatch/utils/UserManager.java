@@ -7,6 +7,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import edu.utsa.cs3443.mealmatch.data.DataManager;
+import edu.utsa.cs3443.mealmatch.model.Dish;
 import edu.utsa.cs3443.mealmatch.model.GroceryList;
 import edu.utsa.cs3443.mealmatch.model.User;
 
@@ -64,6 +65,15 @@ public class UserManager {
 
     public void logout(){
         this.user = null;
+    }
+
+    public void addFavoriteDish(int id, Context context){
+        user.getFavoriteDishes().add(id);
+        DataManager.getInstance().updateUser(context);
+    }
+    public void removeFavoriteDish(int id, Context context){
+        user.getFavoriteDishes().remove(id);
+        DataManager.getInstance().updateUser(context);
     }
 }
 
