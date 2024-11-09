@@ -2,6 +2,7 @@ package edu.utsa.cs3443.mealmatch;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -10,8 +11,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+import edu.utsa.cs3443.mealmatch.adapter.RecommendDishAdapter;
+import edu.utsa.cs3443.mealmatch.data.DataManager;
+import edu.utsa.cs3443.mealmatch.model.Dish;
+import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
 public class MainActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private RecommendDishAdapter dishAdapter;
+    private ArrayList<Dish> dishesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +38,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         tempNavigationHandle();
+
+//        for (Dish dish : DataManager.getInstance().getDishes()){
+//            if (UserManager.getInstance().getUser().getFavoriteDishes().contains(dish.getID())){
+//                //dishesList.add(dish);
+//                Log.e("TAG", dish.toString());
+//            }
+//        }
+
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Initialize Player List and Adapter
+        dishAdapter = new RecommendDishAdapter(this, DataManager.getInstance().getDishes());
+        recyclerView.setAdapter(dishAdapter);
     }
 
     private void tempNavigationHandle(){
