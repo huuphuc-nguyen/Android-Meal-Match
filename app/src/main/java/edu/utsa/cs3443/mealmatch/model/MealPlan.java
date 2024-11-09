@@ -1,18 +1,19 @@
 package edu.utsa.cs3443.mealmatch.model;
 
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class MealPlan {
     private int ID;
     private Date planDate;
-    private ArrayList<Dish> dishes;
-    private static int IDCounter;
+    private ArrayList<Integer> dishesID;
 
-    public MealPlan(int ID, Date planDate, ArrayList<Dish> dishes) {
+    public MealPlan(int ID, Date planDate, ArrayList<Integer> dishesID) {
         this.ID = ID;
         this.planDate = planDate;
-        this.dishes = dishes;
+        this.dishesID = dishesID;
     }
 
     public int getID() {
@@ -31,19 +32,26 @@ public class MealPlan {
         this.planDate = planDate;
     }
 
-    public ArrayList<Dish> getDishes() {
-        return dishes;
+    public ArrayList<Integer> getDishes() {
+        return dishesID;
     }
 
-    public void setDishes(ArrayList<Dish> dishes) {
-        this.dishes = dishes;
+    public void setDishes(ArrayList<Integer> dishesID) {
+        this.dishesID = dishesID;
     }
 
-    public static int getIDCounter() {
-        return IDCounter;
-    }
+    @Override
+    public String toString() {
+        // Format the date as MM-dd-yyyy
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+        String dateStr = formatter.format(planDate);
 
-    public static void setIDCounter(int IDCounter) {
-        MealPlan.IDCounter = IDCounter;
+        // Convert dishesID list to semicolon-separated string
+        String dishesStr = dishesID.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(";"));
+
+        // Return as CSV line
+        return ID + ", " + dateStr + ", " + dishesStr;
     }
 }

@@ -12,30 +12,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MealMatch"
         tools:targetApi="31">
+
         <activity
-            android:name=".GroceryListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MealPlannerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FavoriteDishesActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignupActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true">
+            android:name=".SplashScreen"
+            android:exported="true"
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".GroceryListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MealMatch"/>
+        <activity
+            android:name=".MealPlannerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MealMatch"/>
+        <activity
+            android:name=".FavoriteDishesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MealMatch"/>
+        <activity
+            android:name=".SignupActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MealMatch"/>
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MealMatch"/>
+
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MealMatch"/>
     </application>
 
 </manifest>

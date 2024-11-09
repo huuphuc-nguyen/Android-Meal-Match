@@ -1,11 +1,15 @@
 package edu.utsa.cs3443.mealmatch.model;
 
+import android.annotation.SuppressLint;
+
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class GroceryList {
     private int ID;
     private ArrayList<Integer> tasks;
-    private static int IDCounter;
 
     public GroceryList(int ID, ArrayList<Integer> tasks) {
         this.ID = ID;
@@ -28,11 +32,17 @@ public class GroceryList {
         this.tasks = tasks;
     }
 
-    public static int getIDCounter() {
-        return IDCounter;
-    }
+    @NonNull
+    @SuppressLint("DefaultLocale")
+    @Override
+    public String toString() {
 
-    public static void setIDCounter(int IDCounter) {
-        GroceryList.IDCounter = IDCounter;
+        String tasksString = tasks.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(";"));
+
+        // Format as CSV
+        return String.format("%d, %s",
+                ID, tasksString);
     }
 }
