@@ -6,5 +6,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FavoriteDishesActivity">
+    <ImageView
+        android:id="@+id/topImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/background_favorites"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="4dp"
+        android:background="#80000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txt_searchF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="search for meals"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="20dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/hint_searchfor meals"
+        android:paddingHorizontal="12dp"
+        android:paddingBottom="20dp"
+        android:textSize="15sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="136dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
