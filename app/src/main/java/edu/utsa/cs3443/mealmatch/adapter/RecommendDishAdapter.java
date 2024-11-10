@@ -69,7 +69,6 @@ public class RecommendDishAdapter extends RecyclerView.Adapter<RecommendDishAdap
         });
     }
 
-
     @Override
     public int getItemCount() {
         return dishesList.size();

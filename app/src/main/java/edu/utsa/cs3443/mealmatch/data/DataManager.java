@@ -7,10 +7,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.zip.CheckedInputStream;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import edu.utsa.cs3443.mealmatch.model.User;
 import edu.utsa.cs3443.mealmatch.model.Dish;
@@ -22,18 +22,18 @@ import edu.utsa.cs3443.mealmatch.utils.HelperFunctions;
 
 public class DataManager {
     private static DataManager instance;
-    private ArrayList<User> Users;
-    private ArrayList<Dish> Dishes;
-    private ArrayList<MealPlan> MealPlans;
-    private ArrayList<GroceryList> GroceryLists;
-    private ArrayList<Task> Tasks;
+    private HashMap<String, User> users; // Keyed by email for quick lookup
+    private HashMap<Integer, Dish> dishes; // Keyed by dish ID
+    private HashMap<Integer, MealPlan> mealPlans; // Keyed by meal plan ID
+    private HashMap<Integer, GroceryList> groceryLists; // Keyed by grocery list ID
+    private HashMap<Integer, Task> tasks; // Keyed by task ID
 
     private DataManager() {
-        Users = new ArrayList<User>();
-        Dishes = new ArrayList<Dish>();
-        MealPlans = new ArrayList<MealPlan>();
-        GroceryLists = new ArrayList<GroceryList>();
-        Tasks = new ArrayList<Task>();
+        users = new HashMap<>();
+        dishes = new HashMap<>();
+        mealPlans = new HashMap<>();
+        groceryLists = new HashMap<>();
+        tasks = new HashMap<>();
     }
 
     public static DataManager getInstance() {
@@ -43,42 +43,36 @@ public class DataManager {
         return instance;
     }
 
-    public ArrayList<User> getUsers() {
-        return Users;
+    // Getters
+    public HashMap<String, User> getUsers() {
+        return users;
     }
 
-    public ArrayList<Dish> getDishes(){
-        return Dishes;
+    public HashMap<Integer, Dish> getDishes() {
+        return dishes;
     }
 
-    public ArrayList<MealPlan> getMealPlans(){
-        return MealPlans;
+    public HashMap<Integer, MealPlan> getMealPlans() {
+        return mealPlans;
     }
 
-    public ArrayList<GroceryList> getGroceryLists(){
-        return GroceryLists;
+    public HashMap<Integer, GroceryList> getGroceryLists() {
+        return groceryLists;
     }
 
-    public ArrayList<Task> getTasks(){
-        return Tasks;
+    public HashMap<Integer, Task> getTasks() {
+        return tasks;
     }
 
-    public void loadAllData(Context context){
-        // Load users file
+    // Load data functions
+    public void loadAllData(Context context) {
         loadUsersFile(context);
-
-        // Load dishes file
         loadDishesFile(context);
-
-        // Load grocery lists file
         loadGroceryListsFile(context);
-
-        // Load task file
         loadTasksFile(context);
-
-        // Load meal plan file
         loadMealPlanFile(context);
     }
+
 
     // READING FILE FUNCTIONS
     private void loadUsersFile(Context context){
@@ -101,14 +95,14 @@ public class DataManager {
                 String lastname = columns[3].trim();
                 Integer groceryID = Integer.parseInt(columns[5].trim());
 
-                // Parse favoriteDishes
-                ArrayList<Integer> favoriteDishes = HelperFunctions.parseIntegerList(columns[4].trim(), ";");
+                // Parse favoriteDishes as HashSet
+                HashSet<Integer> favoriteDishes = new HashSet<>(HelperFunctions.parseIntegerList(columns[4].trim(), ";"));
 
                 // Parse mealPlans (splitting by ";")
                 ArrayList<Integer> mealPlans = HelperFunctions.parseIntegerList(columns[6].trim(), ";");
 
                 User user = new User(email, password, firstname, lastname, groceryID, favoriteDishes, mealPlans);
-                this.Users.add(user);
+                users.put(email, user);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -141,7 +135,7 @@ public class DataManager {
                 ArrayList<String> ingredients = HelperFunctions.parseStringList(columns[8].trim(), ";");
 
                 Dish dish = new Dish(id, name, description, imageUrl, calories, protein, carb, fat, ingredients);
-                this.Dishes.add(dish);
+                dishes.put(id, dish);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -167,7 +161,7 @@ public class DataManager {
                 ArrayList<Integer> tasks = HelperFunctions.parseIntegerList(columns[1].trim(), ";");
 
                 GroceryList groceryList = new GroceryList(id,tasks);
-                this.GroceryLists.add(groceryList);
+                groceryLists.put(id, groceryList);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -195,7 +189,7 @@ public class DataManager {
 
                 // Create Task object
                 Task task = new Task(id, name, type, isDone);
-                Tasks.add(task);
+                tasks.put(id, task);
             }
 
         } catch (IOException e) {
@@ -223,7 +217,7 @@ public class DataManager {
 
                 // Create MealPlan object
                 MealPlan mealPlan = new MealPlan(id, planDate, dishesID);
-                MealPlans.add(mealPlan);
+                mealPlans.put(id, mealPlan);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -233,69 +227,44 @@ public class DataManager {
     // ADD TO ARRAYLIST FUNCTIONS
 
     public void addUserToList(User user, Context context){
-        this.Users.add(user);
+        users.put(user.getEmail(), user);
         saveUserData(context);
     }
 
     public void addMealPlan(MealPlan mealPlan, Context context){
-        this.MealPlans.add(mealPlan);
+        mealPlans.put(mealPlan.getID(), mealPlan);
         saveMealPlanData(context);
     }
 
     public void addTask(Task task, Context context){
-        this.Tasks.add(task);
+        tasks.put(task.getID(), task);
         saveTaskData(context);
     }
 
     public void addGroceryList(GroceryList groceryList, Context context){
-        this.GroceryLists.add(groceryList);
+        groceryLists.put(groceryList.getID(), groceryList);
         saveGroceryListData(context);
     }
 
-    // GET ELEMENT WITH ID
-    public User getUserByEmail(String email){
-        for (User user : Users) {
-            if (user.getEmail().equalsIgnoreCase(email.trim())) {
-                return user;
-            }
-        }
-        return null;
+    // GET ELEMENT BY KEY
+    public User getUserByEmail(String email) {
+        return users.get(email);
     }
 
-    public Dish getDishById(int id){
-        for (Dish dish : Dishes) {
-            if (dish.getID() == id) {
-                return dish;
-            }
-        }
-        return null;
+    public Dish getDishById(int id) {
+        return dishes.get(id);
     }
 
-    public MealPlan getMealPlanById(int id){
-        for (MealPlan mealPlan : MealPlans){
-            if (mealPlan.getID() == id){
-                return mealPlan;
-            }
-        }
-        return null;
+    public MealPlan getMealPlanById(int id) {
+        return mealPlans.get(id);
     }
 
-    public Task getTaskById(int id){
-        for (Task task : Tasks){
-            if(task.getID() == id){
-                return task;
-            }
-        }
-        return null;
+    public Task getTaskById(int id) {
+        return tasks.get(id);
     }
 
-    public GroceryList getGroceryListById(int id){
-        for (GroceryList groceryList : GroceryLists){
-            if (groceryList.getID() == id){
-                return  groceryList;
-            }
-        }
-        return null;
+    public GroceryList getGroceryListById(int id) {
+        return groceryLists.get(id);
     }
 
     // SAVE ARRAYLIST TO FILES
@@ -308,7 +277,7 @@ public class DataManager {
             data.append("Username, password, first name, last name, favoriteDishes, groceryListID, mealPlans").append("\n");
 
             // Build the data string from all users in the list
-            for (User user : Users) {
+            for (User user : users.values()) {
                 data.append(user.toString()).append("\n");
             }
 
@@ -329,7 +298,7 @@ public class DataManager {
 
             data.append("Id, name, type, isDone").append("\n");
 
-            for (Task task : Tasks) {
+            for (Task task : tasks.values()) {
                 data.append(task.toString()).append("\n");
             }
 
@@ -350,7 +319,7 @@ public class DataManager {
 
             data.append("Id, TasksId").append("\n");
 
-            for (GroceryList groceryList : GroceryLists) {
+            for (GroceryList groceryList : groceryLists.values()) {
                 data.append(groceryList.toString()).append("\n");
             }
 
@@ -371,7 +340,7 @@ public class DataManager {
 
             data.append("ID, planDate, dishID").append("\n");
 
-            for (MealPlan mealPlan : MealPlans) {
+            for (MealPlan mealPlan : mealPlans.values()) {
                 data.append(mealPlan.toString()).append("\n");
             }
 
@@ -397,38 +366,34 @@ public class DataManager {
     }
 
     // ID generator
-
     public int getNextGroceryListID() {
-        if (GroceryLists.isEmpty()) {
+        if (groceryLists.isEmpty()) {
             return 1; // Start IDs from 1 if the list is empty
         }
 
         // Find the maximum ID in the current list
-        return GroceryLists.stream()
-                .mapToInt(GroceryList::getID)
-                .max()
-                .orElse(0) + 1; // Increment the maximum ID by 1
+        return groceryLists.keySet().stream()
+                .max(Integer::compareTo)
+                .orElse(0) + 1;
     }
 
     public int getNextTaskID() {
-        if (Tasks.isEmpty()) {
+        if (tasks.isEmpty()) {
             return 1; // Start IDs from 1 if the list is empty
         }
 
-        return Tasks.stream()
-                .mapToInt(Task::getID)
-                .max()
+        return tasks.keySet().stream()
+                .max(Integer::compareTo)
                 .orElse(0) + 1;
     }
 
     public int getNextMealPlanID() {
-        if (MealPlans.isEmpty()) {
+        if (mealPlans.isEmpty()) {
             return 1; // Start IDs from 1 if the list is empty
         }
 
-        return MealPlans.stream()
-                .mapToInt(MealPlan::getID)
-                .max()
+        return mealPlans.keySet().stream()
+                .max(Integer::compareTo)
                 .orElse(0) + 1;
     }
 }

@@ -25,7 +25,6 @@ import edu.utsa.cs3443.mealmatch.utils.UserManager;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecommendDishAdapter dishAdapter;
-    ArrayList<Dish> dishData = DataManager.getInstance().getDishes();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +40,6 @@ public class MainActivity extends AppCompatActivity {
         tempNavigationHandle();
 
         initializeRecommendDishes();
-
-//        for (Dish dish : DataManager.getInstance().getDishes()){
-//            if (UserManager.getInstance().getUser().getFavoriteDishes().contains(dish.getID())){
-//                //dishesList.add(dish);
-//                Log.e("TAG", dish.toString());
-//            }
-//        }
-
     }
 
     private void tempNavigationHandle(){
@@ -80,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeRecommendDishes(){
         // Create a clone list, then shuffle, then pick random 5 dishes
+        ArrayList<Dish> dishData = new ArrayList<>(DataManager.getInstance().getDishes().values());
         ArrayList<Dish> cloneArray = new ArrayList<>(dishData);
         Collections.shuffle(cloneArray);
         ArrayList<Dish> recommendDishes = new ArrayList<>(cloneArray.subList(0, 5));

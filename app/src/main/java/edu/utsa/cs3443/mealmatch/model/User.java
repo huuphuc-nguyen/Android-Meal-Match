@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 public class User {
@@ -13,7 +14,7 @@ public class User {
     private String firstname;
     private String lastname;
     private Integer groceryID;
-    private ArrayList<Integer> favoriteDishes;
+    private HashSet<Integer> favoriteDishes;
     private ArrayList<Integer> mealPlans;
 
     // This Constructor is used in Signup Activity when creating new user
@@ -23,8 +24,7 @@ public class User {
         this.firstname = firstname;
         this.lastname = lastname;
         this.groceryID = 0;
-        this.favoriteDishes = new ArrayList<>();
-        this.favoriteDishes.add(0);
+        this.favoriteDishes = new HashSet<>();
         this.mealPlans = new ArrayList<>();
         this.mealPlans.add(0);
         // add 0 inorder to initialize enough a mount of fields
@@ -32,7 +32,7 @@ public class User {
     }
 
     // This Constructor is used in Data Manager to map stored data to object user
-    public User(String email, String password, String firstname, String lastname, Integer groceryID, ArrayList<Integer> favoriteDishes, ArrayList<Integer> mealPlans) {
+    public User(String email, String password, String firstname, String lastname, Integer groceryID, HashSet<Integer> favoriteDishes, ArrayList<Integer> mealPlans) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
@@ -82,11 +82,11 @@ public class User {
         this.groceryID = groceryID;
     }
 
-    public ArrayList<Integer> getFavoriteDishes() {
+    public HashSet<Integer> getFavoriteDishes() {
         return favoriteDishes;
     }
 
-    public void setFavoriteDishes(ArrayList<Integer> favoriteDishes) {
+    public void setFavoriteDishes(HashSet<Integer> favoriteDishes) {
         this.favoriteDishes = favoriteDishes;
     }
 
