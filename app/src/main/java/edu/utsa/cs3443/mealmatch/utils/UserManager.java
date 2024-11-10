@@ -32,23 +32,24 @@ public class UserManager {
         return user;
     }
 
-    public boolean login(String email, String password){
+        public boolean login(String email, String password){
+            User user = DataManager.getInstance().getUserByEmail(email);
 
-        for (User user: DataManager.getInstance().getUsers()){
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)){
-
-                // Get current user data
-                User current_user = DataManager.getInstance().getUserByEmail(email);
-                setUser(current_user);
-
+            if (user != null && user.getPassword().equals(password)) {
+                // Set the current user if email and password match
+                setUser(user);
                 return true;
             }
+
+            return false;
         }
 
-        return false;
-    }
+    public boolean addNewUser(String email, String password, String firstname, String lastname, Context context){
+        // Check if the email already exists in DataManager
+        if (DataManager.getInstance().getUserByEmail(email) != null) {
+            return false; // Exit the method if the email is already in use
+        }
 
-    public void addNewUser(String email, String password, String firstname, String lastname, Context context){
         User newUser = new User(email, password, firstname, lastname);
 
         // Create new grocery list for new account
@@ -61,6 +62,8 @@ public class UserManager {
         // Update data and save to file
         DataManager.getInstance().addGroceryList(newList, context);
         DataManager.getInstance().addUserToList(newUser, context);
+
+        return true;
     }
 
     public void logout(){
