@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
         // Load all data here
         DataManager.getInstance().loadAllData(this);
 
+        // Set up login button
         Button btn_login = findViewById(R.id.btn_login);
-
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Set up signup button
         TextView txt_signup = findViewById(R.id.txt_signin);
-
         txt_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

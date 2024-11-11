@@ -21,10 +21,12 @@ import edu.utsa.cs3443.mealmatch.utils.UserManager;
 public class RecommendDishAdapter extends RecyclerView.Adapter<RecommendDishAdapter.RecommendDishViewHolder>{
     private ArrayList<Dish> dishesList;
     private Context context;
+    private OnDishClickListener dishClickListener;
 
-    public RecommendDishAdapter(Context context, ArrayList<Dish> dishesList) {
+    public RecommendDishAdapter(Context context, ArrayList<Dish> dishesList, OnDishClickListener dishClickListener) {
         this.context = context;
         this.dishesList = dishesList;
+        this.dishClickListener = dishClickListener;
     }
 
     @NonNull
@@ -67,6 +69,13 @@ public class RecommendDishAdapter extends RecyclerView.Adapter<RecommendDishAdap
             // Update UI after toggle
             notifyItemChanged(position);
         });
+
+        // Click listener for the entire card
+        holder.itemView.setOnClickListener(v -> {
+            if (dishClickListener != null) {
+                dishClickListener.onDishClick(dish); // Pass clicked dish to the listener
+            }
+        });
     }
 
     @Override
@@ -84,5 +93,9 @@ public class RecommendDishAdapter extends RecyclerView.Adapter<RecommendDishAdap
             imgFavoriteIcon = itemView.findViewById(R.id.ic_add_favorite);
             txtDishName = itemView.findViewById(R.id.txt_dish_name);
         }
+    }
+
+    public interface OnDishClickListener {
+        void onDishClick(Dish dish);
     }
 }

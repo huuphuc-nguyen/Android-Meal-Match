@@ -81,7 +81,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
         // Initialize Player List and Adapter
-        dishAdapter = new RecommendDishAdapter(this, recommendDishes);
+        dishAdapter = new RecommendDishAdapter(this, recommendDishes, dish -> {
+            Intent intent = new Intent(this, DishDetailActivity.class);
+            intent.putExtra("dish_id", dish.getID());
+            startActivity(intent);
+        });
         recyclerView.setAdapter(dishAdapter);
     }
 }
