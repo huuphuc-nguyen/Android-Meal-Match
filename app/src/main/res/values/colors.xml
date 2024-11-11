@@ -6,4 +6,5 @@
     <color name="background_secondary">#F7EED3</color>
     <color name="emphasize_dark">#674636</color>
     <color name="emphasize_green">#AAB396</color>
+    <color name="gray">#CAC4D0</color>
 </resources>
