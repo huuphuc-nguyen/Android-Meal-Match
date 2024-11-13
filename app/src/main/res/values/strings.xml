@@ -7,6 +7,7 @@
     <string name="hint_lastname">Last name</string>
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_searchformeals">Search for your meals</string>
     <string name="btn_signup">Sign up</string>
     <string name="label_do_not_have_an_account">Don\'t have an account?</string>
     <string name="label_recommended">Recommend Dishes</string>

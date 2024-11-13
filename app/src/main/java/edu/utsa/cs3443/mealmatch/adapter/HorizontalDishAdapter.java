@@ -1,6 +1,5 @@
 package edu.utsa.cs3443.mealmatch.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +18,12 @@ import edu.utsa.cs3443.mealmatch.R;
 import edu.utsa.cs3443.mealmatch.model.Dish;
 import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
-public class RecommendDishAdapter extends RecyclerView.Adapter<RecommendDishAdapter.RecommendDishViewHolder>{
+public class HorizontalDishAdapter extends RecyclerView.Adapter<HorizontalDishAdapter.RecommendDishViewHolder>{
     private ArrayList<Dish> dishesList;
     private Context context;
     private OnDishClickListener dishClickListener;
 
-    public RecommendDishAdapter(Context context, ArrayList<Dish> dishesList, OnDishClickListener dishClickListener) {
+    public HorizontalDishAdapter(Context context, ArrayList<Dish> dishesList, OnDishClickListener dishClickListener) {
         this.context = context;
         this.dishesList = dishesList;
         this.dishClickListener = dishClickListener;
@@ -33,12 +32,12 @@ public class RecommendDishAdapter extends RecyclerView.Adapter<RecommendDishAdap
     @NonNull
     @Override
     public RecommendDishViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.card_recommend_dish, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.card_horizontal_fit_dish, parent, false);
         return new RecommendDishViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecommendDishAdapter.RecommendDishViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HorizontalDishAdapter.RecommendDishViewHolder holder, int position) {
         Dish dish = dishesList.get(position);
 
         boolean isFavorite = UserManager.getInstance().getUser().getFavoriteDishes().contains(dish.getID());
@@ -98,11 +97,5 @@ public class RecommendDishAdapter extends RecyclerView.Adapter<RecommendDishAdap
 
     public interface OnDishClickListener {
         void onDishClick(Dish dish);
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    public void updateData(ArrayList<Dish> newDishes) {
-        this.dishesList = newDishes;
-        notifyDataSetChanged();
     }
 }
