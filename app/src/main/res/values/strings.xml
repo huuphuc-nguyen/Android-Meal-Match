@@ -11,4 +11,8 @@
     <string name="label_do_not_have_an_account">Don\'t have an account?</string>
     <string name="label_recommended">Recommend Dishes</string>
     <string name="label_add_all_ingredients">Add All to Shopping List</string>
+    <string name="grocery_list">Here are your tasks…</string>
+    <string name="task_name">Task Name</string>
+    <string name="task_type">Task Type</string>
+    <string name="add_item">Add Item +</string>
 </resources>
