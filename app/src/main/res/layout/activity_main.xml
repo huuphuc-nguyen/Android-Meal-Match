@@ -40,6 +40,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#80000000" />
+                <TextView
+                    android:id="@+id/txt_greeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Hello user"
+                    android:textColor="@color/background_primary"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="24sp"
+                    android:layout_marginTop="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="50dp"/>
+                <EditText
+                    android:background="@drawable/txt_grounded"
+                    android:id="@+id/txt_search"
+                    android:layout_width="300dp"
+                    android:textSize="14sp"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_searchformeals"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="50dp"/>
             </RelativeLayout>
 
             <!-- Welcome Text -->
