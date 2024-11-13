@@ -45,7 +45,19 @@ public class SearchResultActivity extends AppCompatActivity {
 
         setSearchDishes(searchTerm);
         setTitle(searchTerm);
+        setButtons();
     }
+    private void setButtons(){
+        TextView btn_back = findViewById(R.id.btn_back);
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
     private void setTitle(String searchTerm){
         TextView txtTitle = findViewById(R.id.txt_search_result_for);
         String title = "Search results for \"" + searchTerm + "\"";
