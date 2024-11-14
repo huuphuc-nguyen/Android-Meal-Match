@@ -353,6 +353,10 @@ public class DataManager {
         }
     }
 
+    public void updateTask(Context context){
+        saveTaskData(context);
+    }
+
     public void updateUser(Context context){
         saveUserData(context);
     }

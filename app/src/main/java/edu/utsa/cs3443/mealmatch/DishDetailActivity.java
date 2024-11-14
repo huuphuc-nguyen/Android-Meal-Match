@@ -25,8 +25,13 @@ import java.util.ArrayList;
 import edu.utsa.cs3443.mealmatch.adapter.IngredientAdapter;
 import edu.utsa.cs3443.mealmatch.data.DataManager;
 import edu.utsa.cs3443.mealmatch.model.Dish;
+import edu.utsa.cs3443.mealmatch.model.GroceryList;
+import edu.utsa.cs3443.mealmatch.model.Task;
+import edu.utsa.cs3443.mealmatch.model.User;
+import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
 public class DishDetailActivity extends AppCompatActivity {
+    private Dish dish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,7 @@ public class DishDetailActivity extends AppCompatActivity {
 
         // Retrieve the dish_id passed from MainActivity
         int dishId = getIntent().getIntExtra("dish_id", -1);
-        Dish dish = DataManager.getInstance().getDishById(dishId);
+        dish = DataManager.getInstance().getDishById(dishId);
 
         displayDishNameAndDescription(dish);
         displayIngredientList(dish);
@@ -50,7 +55,38 @@ public class DishDetailActivity extends AppCompatActivity {
     }
 
     private void addIngredientToGroceryList(String ingredient){
-        // TODO
+        // Check if the task is existed before adding to grocery list
+        boolean isAlreadyInGroceryList = false;
+        int existedTaskID = 0;
+
+        for (Task task : DataManager.getInstance().getTasks().values()){
+            // Check to avoid adding the same task of the same ingredient
+            if (task.getName().equals(ingredient) && task.getType().equals(dish.getName())){
+                isAlreadyInGroceryList = true;
+                existedTaskID = task.getID();
+                break;
+            }
+        }
+
+        if (!isAlreadyInGroceryList){
+            // Create a new task
+            Task newTask = new Task(DataManager.getInstance().getNextTaskID(), ingredient , dish.getName(), false);
+
+            // Add new task to file
+            DataManager.getInstance().addTask(newTask, this);
+
+            // Add new task to Grocery list
+            GroceryList userGroceryList = DataManager.getInstance().getGroceryListById(UserManager.getInstance().getUser().getGroceryID());
+            userGroceryList.addTask(newTask);
+
+            // Update grocery list to file
+            DataManager.getInstance().updateGroceryList(this);
+        }
+        else { // If this ingredient is in the list, mark it as undone in case it is done
+            Task checkTask = DataManager.getInstance().getTaskById(existedTaskID);
+            checkTask.setDone(false);
+            DataManager.getInstance().updateTask(this);
+        }
     }
     private void displayDishNameAndDescription(Dish dish) {
         // Update the UI with dish details
