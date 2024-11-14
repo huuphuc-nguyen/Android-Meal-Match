@@ -51,7 +51,8 @@ Contributions are welcome! Feel free to submit issues or pull requests to enhanc
 ---
 
 ## 📧 Contact
-For any inquiries, reach out to me at: your.email@example.com
+// TODO: Update Group's email
+For any inquiries, reach out to me at: 
 
 ## ⭐ Acknowledgements
 - Icons from [FlatIcon](https://www.flaticon.com/) and Images from [Unplash](https://unsplash.com/)
