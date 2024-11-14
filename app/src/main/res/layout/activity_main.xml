@@ -32,8 +32,8 @@
                     android:id="@+id/topImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/background_login"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/background_login" />
 
                 <View
                     android:id="@+id/overlay"
@@ -47,7 +47,7 @@
                     tools:text="Hello user"
                     android:textColor="@color/background_primary"
                     android:fontFamily="@font/poppins_medium"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
                     android:layout_marginTop="40dp"
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="50dp"/>
