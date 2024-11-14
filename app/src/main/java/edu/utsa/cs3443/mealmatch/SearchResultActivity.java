@@ -3,7 +3,12 @@ package edu.utsa.cs3443.mealmatch;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -45,10 +50,65 @@ public class SearchResultActivity extends AppCompatActivity {
 
         setSearchDishes(searchTerm);
         setTitle(searchTerm);
+        tempNavigationHandle();
         setButtons();
+        searchBarHandler();
     }
+    private void searchBarHandler(){
+        EditText txtSearch = findViewById(R.id.txt_search);
+
+        txtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                    (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
+
+                String searchTerm = txtSearch.getText().toString().trim().toLowerCase();
+
+
+
+                if (!searchTerm.isEmpty()) {
+//                    Intent intent = new Intent(SearchResultActivity.this, SearchResultActivity.class);
+//                    intent.putExtra("search_term", searchTerm);
+//                    startActivity(intent);
+//                    finish();
+                    setTitle(searchTerm);
+                    setSearchDishes(searchTerm);
+                }
+                return true;
+            }
+            return false;
+        });
+    }
+
+
+    private void tempNavigationHandle(){
+        ImageButton btn_fav = findViewById(R.id.btn_favoriteDish);
+        ImageButton btn_plan = findViewById(R.id.btn_mealPlanner);
+        ImageButton btn_list = findViewById(R.id.btn_groceryList);
+
+        btn_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SearchResultActivity.this, FavoriteDishesActivity.class));
+            }
+        });
+
+        btn_plan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SearchResultActivity.this, MealPlannerActivity.class));
+            }
+        });
+
+        btn_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SearchResultActivity.this, GroceryListActivity.class));
+            }
+        });
+    }
+
     private void setButtons(){
-        TextView btn_back = findViewById(R.id.btn_back);
+        ImageView btn_back = findViewById(R.id.btn_back);
 
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
