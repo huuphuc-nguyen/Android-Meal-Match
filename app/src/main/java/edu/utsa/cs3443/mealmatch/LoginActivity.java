@@ -2,6 +2,8 @@ package edu.utsa.cs3443.mealmatch;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+
+import edu.utsa.cs3443.mealmatch.data.DataManager;
+import edu.utsa.cs3443.mealmatch.model.Dish;
+import edu.utsa.cs3443.mealmatch.model.GroceryList;
+import edu.utsa.cs3443.mealmatch.model.MealPlan;
+import edu.utsa.cs3443.mealmatch.model.Task;
+import edu.utsa.cs3443.mealmatch.model.User;
 import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
 public class LoginActivity extends AppCompatActivity {
@@ -29,8 +43,11 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button btn_login = findViewById(R.id.btn_login);
+        // Load all data here
+        DataManager.getInstance().loadAllData(this);
 
+        // Set up login button
+        Button btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Set up signup button
         TextView txt_signup = findViewById(R.id.txt_signin);
-
         txt_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

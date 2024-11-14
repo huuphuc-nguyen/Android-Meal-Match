@@ -6,5 +6,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".GroceryListActivity">
+    <View
+        android:id="@+id/top_border"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/emphasize_dark"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/background_primary"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="24dp"
+            android:src="@drawable/ic_home" />
+
+        <ImageButton
+            android:id="@+id/btn_favoriteDish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="24dp"
+            android:src="@drawable/ic_heart" />
+
+        <ImageButton
+            android:id="@+id/btn_mealPlanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="24dp"
+            android:src="@drawable/ic_calendar" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_groceryList"
+            android:layout_width="84dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/button_grounded"
+            android:drawableLeft="@drawable/ic_list"
+            android:drawableTint="@color/background_primary"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:textColor="@color/background_primary" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,89 +5,53 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".SearchResultActivity">
 
-    <!-- ScrollView for Image and Content -->
-    <ScrollView
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@id/top_border"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/background_primary">
 
+        <!-- Search Result Text -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/background_primary">
-
-            <!-- Top Image with Overlay -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
-
-                <ImageView
-                    android:id="@+id/topImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/background_login"
-                    android:scaleType="centerCrop" />
-
-                <View
-                    android:id="@+id/overlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#80000000" />
-                <TextView
-                    android:id="@+id/txt_greeting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Hello user"
-                    android:textColor="@color/background_primary"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textSize="24sp"
-                    android:layout_marginTop="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="50dp"/>
-                <EditText
-                    android:background="@drawable/txt_grounded"
-                    android:id="@+id/txt_search"
-                    android:layout_width="300dp"
-                    android:textSize="14sp"
-                    android:drawableStart="@drawable/ic_search"
-                    android:drawablePadding="10dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_searchformeals"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="50dp"/>
-            </RelativeLayout>
-
-            <!-- Welcome Text -->
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="30dp">
             <TextView
-                android:id="@+id/txt_recommend"
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="&lt;"
+                android:textColor="@color/emphasize_dark"
+                android:textSize="20sp"
+                android:layout_marginStart="15dp" />
+            <TextView
+                android:id="@+id/txt_search_result_for"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_semibold"
-                android:text="@string/label_recommended"
+                tools:text="Search result for: abc"
                 android:textColor="@color/emphasize_dark"
-                android:textSize="20sp"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="10dp" />
-
-            <!-- RecyclerView -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:paddingHorizontal="10dp" />
+                android:textSize="18sp"
+                android:layout_marginStart="10dp" />
         </LinearLayout>
-    </ScrollView>
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:paddingHorizontal="10dp" />
+    </LinearLayout>
 
     <!-- Navigation Menu -->
     <View
@@ -145,4 +109,5 @@
             android:padding="24dp"
             android:src="@drawable/ic_list" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

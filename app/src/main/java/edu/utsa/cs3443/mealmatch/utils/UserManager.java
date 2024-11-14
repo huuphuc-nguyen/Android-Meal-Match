@@ -1,8 +1,14 @@
 package edu.utsa.cs3443.mealmatch.utils;
 
+import android.content.Context;
+import android.provider.ContactsContract;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import edu.utsa.cs3443.mealmatch.data.DataManager;
+import edu.utsa.cs3443.mealmatch.model.Dish;
+import edu.utsa.cs3443.mealmatch.model.GroceryList;
 import edu.utsa.cs3443.mealmatch.model.User;
 
 public class UserManager {
@@ -26,26 +32,51 @@ public class UserManager {
         return user;
     }
 
-    public boolean login(String email, String password){
+        public boolean login(String email, String password){
+            User user = DataManager.getInstance().getUserByEmail(email);
 
-        for (User user: DataManager.getInstance().getUsers()){
-            if (user.getEmail().equals(email) && user.getPassword().equals(password)){
+            if (user != null && user.getPassword().equals(password)) {
+                // Set the current user if email and password match
+                setUser(user);
                 return true;
             }
+
+            return false;
         }
 
-        return false;
-    }
+    public boolean addNewUser(String email, String password, String firstname, String lastname, Context context){
+        // Check if the email already exists in DataManager
+        if (DataManager.getInstance().getUserByEmail(email) != null) {
+            return false; // Exit the method if the email is already in use
+        }
 
-
-    public void addNewUser(String email, String password, String firstname, String lastname){
         User newUser = new User(email, password, firstname, lastname);
 
-        DataManager.getInstance().writeUser(newUser);
+        // Create new grocery list for new account
+        int newID = DataManager.getInstance().getNextGroceryListID();
+        ArrayList<Integer> tasks = new ArrayList<>();
+        tasks.add(0);
+        GroceryList newList = new GroceryList(newID, tasks);
+        newUser.setGroceryID(newID);
+
+        // Update data and save to file
+        DataManager.getInstance().addGroceryList(newList, context);
+        DataManager.getInstance().addUserToList(newUser, context);
+
+        return true;
     }
 
     public void logout(){
         this.user = null;
+    }
+
+    public void addFavoriteDish(int id, Context context){
+        user.getFavoriteDishes().add(id);
+        DataManager.getInstance().updateUser(context);
+    }
+    public void removeFavoriteDish(int id, Context context){
+        user.getFavoriteDishes().remove(Integer.valueOf(id));
+        DataManager.getInstance().updateUser(context);
     }
 }
 
