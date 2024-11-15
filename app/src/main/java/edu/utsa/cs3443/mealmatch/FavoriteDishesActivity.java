@@ -41,7 +41,7 @@ public class FavoriteDishesActivity extends AppCompatActivity {
         });
         tempNavigationHandle();
 
-        displayFavoriteDishes();
+        //displayFavoriteDishes();
     }
 
     private void tempNavigationHandle(){
