@@ -1,17 +1,33 @@
 package edu.utsa.cs3443.mealmatch;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+import edu.utsa.cs3443.mealmatch.adapter.HorizontalDishAdapter;
+import edu.utsa.cs3443.mealmatch.data.DataManager;
+import edu.utsa.cs3443.mealmatch.model.Dish;
+import edu.utsa.cs3443.mealmatch.model.User;
+import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
 public class FavoriteDishesActivity extends AppCompatActivity {
+    ArrayList<Dish> favDishes;
+    private RecyclerView recyclerView;
+    private HorizontalDishAdapter dishAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +40,8 @@ public class FavoriteDishesActivity extends AppCompatActivity {
             return insets;
         });
         tempNavigationHandle();
+
+        displayFavoriteDishes();
     }
 
     private void tempNavigationHandle(){
@@ -52,4 +70,36 @@ public class FavoriteDishesActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void displayFavoriteDishes(){
+        favDishes = new ArrayList<>();
+
+        for (int id : UserManager.getInstance().getUser().getFavoriteDishes()){
+            Dish getDish = DataManager.getInstance().getDishById(id);
+            favDishes.add(getDish);
+        }
+
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        // Add ItemDecoration for vertical spacing
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.top = 10; // Top margin
+                outRect.bottom = 10; // Bottom margin
+            }
+        });
+
+        // Initialize Player List and Adapter
+        dishAdapter = new HorizontalDishAdapter(this, favDishes, dish -> {
+            Intent intent = new Intent(this, DishDetailActivity.class);
+            intent.putExtra("dish_id", dish.getID());
+            startActivity(intent);
+        });
+        recyclerView.setAdapter(dishAdapter);
+    }
+
 }
