@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -49,6 +50,17 @@ public class MainActivity extends AppCompatActivity {
         searchBarHandler();
 
         setGreeting();
+
+        logoutHandler();
+    }
+
+    private void logoutHandler(){
+        ImageView btn_logout = findViewById(R.id.btn_logout);
+        btn_logout.setOnClickListener((v) -> {
+            UserManager.getInstance().logout();
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        });
     }
 
     private void tempNavigationHandle(){

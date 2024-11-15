@@ -47,6 +47,29 @@
 
 ---
 
+## 📂 Manually Add Sample Data
+
+The app requires certain **sample data files** to function properly. Follow these steps to upload the data:
+
+### 1. Locate the `sampledata` Folder
+- After cloning the project, navigate to the `sampledata` folder in your project directory.
+
+### 2. Open Device File Explorer
+- In **Android Studio**, go to **View > Tool Windows > Device File Explorer**.
+
+### 3. Navigate to App's Internal Storage
+- Once the **Device File Explorer** opens, navigate to the app’s internal storage path:
+  ```
+  data/data/edu.utsa.cs3443.mealmatch/files/
+  ```
+### 4. Upload Sample Data
+- Drag and drop the files from the `sampledata` folder into the files directory in the **Device File Explorer**.
+
+### 5. Restart the App
+- Once the files are uploaded, restart the app to ensure the sample data is loaded correctly.
+
+---
+
 ## 🔑 How to Get a Groq API Key
 
 To use the AI-powered features in MealMatch, you’ll need a Groq API key. Follow these steps to obtain one:
@@ -77,8 +100,11 @@ Contributions are welcome! Feel free to submit issues or pull requests to enhanc
 ---
 
 ## 📧 Contact
-// TODO: Update Group's email
 For any inquiries, reach out to me at: 
+- gabriel.reyesfen@my.utsa.edu
+- huuphuc.nguyen@my.utsa.edu
+- ian.rohan@my.utsa.edu
+- issac.caldera@my.utsa.edu
 
 ---
 
