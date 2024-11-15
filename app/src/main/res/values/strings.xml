@@ -2,9 +2,10 @@
     <string name="app_name">Meal Match</string>
     <string name="btn_login">Log in</string>
     <string name="label_welcome">Welcome</string>
-    <string name="hint_email">Email</string>
+    <string name="hint_username">Username</string>
     <string name="hint_firstname">First name</string>
     <string name="hint_lastname">Last name</string>
+    <string name="hint_ai">Tell A.I how do you want to cook the dish</string>
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="hint_searchformeals">Search for your meals</string>

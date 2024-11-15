@@ -40,6 +40,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#80000000" />
+                <ImageView
+                    android:id="@+id/btn_logout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_logout"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp" />
                 <TextView
                     android:id="@+id/txt_greeting"
                     android:layout_width="wrap_content"
@@ -49,8 +57,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="20sp"
                     android:layout_marginTop="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="50dp"/>
+                    android:layout_centerHorizontal="true"/>
                 <EditText
                     android:background="@drawable/txt_grounded"
                     android:id="@+id/txt_search"
