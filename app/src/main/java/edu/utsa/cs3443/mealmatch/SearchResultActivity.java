@@ -3,9 +3,13 @@ package edu.utsa.cs3443.mealmatch;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -16,16 +20,17 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 import edu.utsa.cs3443.mealmatch.adapter.HorizontalDishAdapter;
+import edu.utsa.cs3443.mealmatch.adapter.RecommendDishAdapter;
 import edu.utsa.cs3443.mealmatch.data.DataManager;
 import edu.utsa.cs3443.mealmatch.model.Dish;
-import edu.utsa.cs3443.mealmatch.model.User;
-import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
-public class FavoriteDishesActivity extends AppCompatActivity {
-    ArrayList<Dish> favDishes;
+public class SearchResultActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private HorizontalDishAdapter dishAdapter;
 
@@ -33,50 +38,97 @@ public class FavoriteDishesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_favorite_dishes);
+        setContentView(R.layout.activity_search_result);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
-        tempNavigationHandle();
 
-        //displayFavoriteDishes();
+        Intent intent = getIntent();
+        String searchTerm = intent.getStringExtra("search_term");
+
+        setSearchDishes(searchTerm);
+        setTitle(searchTerm);
+        tempNavigationHandle();
+        setButtons();
+        searchBarHandler();
+    }
+    private void searchBarHandler(){
+        EditText txtSearch = findViewById(R.id.txt_search);
+
+        txtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                    (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN)) {
+
+                String searchTerm = txtSearch.getText().toString().trim().toLowerCase();
+
+
+
+                if (!searchTerm.isEmpty()) {
+                    setTitle(searchTerm);
+                    setSearchDishes(searchTerm);
+                }
+                return true;
+            }
+            return false;
+        });
     }
 
+
     private void tempNavigationHandle(){
-        ImageButton btn_home = findViewById(R.id.btn_home);
+        ImageButton btn_fav = findViewById(R.id.btn_favoriteDish);
         ImageButton btn_plan = findViewById(R.id.btn_mealPlanner);
         ImageButton btn_list = findViewById(R.id.btn_groceryList);
 
-        btn_home.setOnClickListener(new View.OnClickListener() {
+        btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FavoriteDishesActivity.this, MainActivity.class));
+                startActivity(new Intent(SearchResultActivity.this, FavoriteDishesActivity.class));
             }
         });
 
         btn_plan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FavoriteDishesActivity.this, MealPlannerActivity.class));
+                startActivity(new Intent(SearchResultActivity.this, MealPlannerActivity.class));
             }
         });
 
         btn_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FavoriteDishesActivity.this, GroceryListActivity.class));
+                startActivity(new Intent(SearchResultActivity.this, GroceryListActivity.class));
             }
         });
     }
 
-    private void displayFavoriteDishes(){
-        favDishes = new ArrayList<>();
+    private void setButtons(){
+        ImageView btn_back = findViewById(R.id.btn_back);
 
-        for (int id : UserManager.getInstance().getUser().getFavoriteDishes()){
-            Dish getDish = DataManager.getInstance().getDishById(id);
-            favDishes.add(getDish);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    private void setTitle(String searchTerm){
+        TextView txtTitle = findViewById(R.id.txt_search_result_for);
+        String title = "Search results for \"" + searchTerm + "\"";
+        txtTitle.setText(title);
+    }
+
+    private void setSearchDishes(String searchTerm){
+        // Create a clone list, then shuffle, then pick random 5 dihes
+        ArrayList<Dish> dishData = new ArrayList<>(DataManager.getInstance().getDishes().values());
+        ArrayList<Dish> setList = new ArrayList<>();
+
+        for (Dish dish : dishData){
+            if (dish.getName().toLowerCase().contains(searchTerm)){
+                setList.add(dish);
+            }
         }
 
         // Initialize RecyclerView
@@ -94,12 +146,11 @@ public class FavoriteDishesActivity extends AppCompatActivity {
         });
 
         // Initialize Player List and Adapter
-        dishAdapter = new HorizontalDishAdapter(this, favDishes, dish -> {
+        dishAdapter = new HorizontalDishAdapter(this, setList, dish -> {
             Intent intent = new Intent(this, DishDetailActivity.class);
             intent.putExtra("dish_id", dish.getID());
             startActivity(intent);
         });
         recyclerView.setAdapter(dishAdapter);
     }
-
 }

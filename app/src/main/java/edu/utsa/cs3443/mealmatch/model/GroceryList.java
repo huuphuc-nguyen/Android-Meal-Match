@@ -32,6 +32,10 @@ public class GroceryList {
         this.tasks = tasks;
     }
 
+    public void addTask(Task task){
+        this.tasks.add(task.getID());
+    }
+
     @NonNull
     @SuppressLint("DefaultLocale")
     @Override

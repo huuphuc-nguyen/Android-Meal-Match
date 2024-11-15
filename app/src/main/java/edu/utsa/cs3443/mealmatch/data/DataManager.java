@@ -236,6 +236,11 @@ public class DataManager {
         saveMealPlanData(context);
     }
 
+    public void removeTask(Task task, Context context){
+        tasks.remove(task.getID());
+        saveTaskData(context);
+    }
+
     public void addTask(Task task, Context context){
         tasks.put(task.getID(), task);
         saveTaskData(context);
@@ -351,6 +356,10 @@ public class DataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateTask(Context context){
+        saveTaskData(context);
     }
 
     public void updateUser(Context context){

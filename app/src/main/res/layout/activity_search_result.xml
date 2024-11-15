@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchResultActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/top_border"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/background_primary">
+
+        <!-- Top Image with Overlay -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <ImageView
+                android:id="@+id/topImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/background_login"
+                android:scaleType="centerCrop" />
+
+            <View
+                android:id="@+id/overlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#80000000" />
+            <ImageView
+                android:id="@+id/btn_back"
+                android:src="@drawable/ic_backward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/background_primary"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp" />
+            <TextView
+                android:id="@+id/txt_search_result_for"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                tools:text="Search result for: abc"
+                android:textColor="@color/background_primary"
+                android:textSize="18sp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:layout_marginStart="10dp" />
+            <EditText
+                android:background="@drawable/txt_grounded"
+                android:id="@+id/txt_search"
+                android:layout_width="300dp"
+                android:textSize="14sp"
+                android:drawableStart="@drawable/ic_search"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_searchformeals"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="50dp"/>
+        </RelativeLayout>
+
+        <!-- Search Result Text -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="30dp">
+        </LinearLayout>
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp" />
+    </LinearLayout>
+
+    <!-- Navigation Menu -->
+    <View
+        android:id="@+id/top_border"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/emphasize_dark"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/background_primary"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_home"
+            android:layout_width="84dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/button_grounded"
+            android:drawableLeft="@drawable/ic_home"
+            android:drawableTint="@color/background_primary"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:textColor="@color/background_primary" />
+
+        <ImageButton
+            android:id="@+id/btn_favoriteDish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="24dp"
+            android:src="@drawable/ic_heart" />
+
+        <ImageButton
+            android:id="@+id/btn_mealPlanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="24dp"
+            android:src="@drawable/ic_calendar" />
+
+        <ImageButton
+            android:id="@+id/btn_groceryList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="24dp"
+            android:src="@drawable/ic_list" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

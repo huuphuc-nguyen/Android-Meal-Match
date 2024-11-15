@@ -34,7 +34,7 @@
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="20dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="@string/hint_searchfor meals"
+        android:hint="@string/hint_searchformeals"
         android:paddingHorizontal="12dp"
         android:paddingBottom="20dp"
         android:textSize="15sp"

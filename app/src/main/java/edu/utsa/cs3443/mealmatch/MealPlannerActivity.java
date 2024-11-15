@@ -35,7 +35,7 @@ public class MealPlannerActivity extends AppCompatActivity {
         btn_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MealPlannerActivity.this, FavoriteDishesActivity.class));
+                startActivity(new Intent(MealPlannerActivity.this, MainActivity.class));
             }
         });
 
