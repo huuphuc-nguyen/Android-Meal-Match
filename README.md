@@ -47,6 +47,30 @@
 
 ---
 
+## 🔑 How to Get a Groq API Key
+
+To use the AI-powered features in MealMatch, you’ll need a Groq API key. Follow these steps to obtain one:
+
+1. **Sign Up for Groq API**:
+   - Visit [Groq API](https://groq.com/).
+   - Create an account or log in if you already have one.
+
+2. **Generate an API Key**:
+   - Once logged in, navigate to the **API Keys** section in your dashboard.
+   - Click **Create New Key** and give it a name (e.g., "MealMatch").
+   - Copy the generated API key.
+
+3. **Add the API Key to Your Project**:
+   - Store the key in your environment variables or securely in `gradle.properties`:
+     ```properties
+     GROQ_API_KEY=your_api_key_here
+     ```
+
+4. **Use the API Key in Your Code**:
+   - Ensure your project reads this key during runtime for making authenticated API calls.
+
+---
+
 ## 🤝 Contributing
 Contributions are welcome! Feel free to submit issues or pull requests to enhance the app.
 
