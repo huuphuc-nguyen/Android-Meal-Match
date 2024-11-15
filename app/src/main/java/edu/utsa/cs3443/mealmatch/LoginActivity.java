@@ -1,5 +1,6 @@
 package edu.utsa.cs3443.mealmatch;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -16,6 +17,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -23,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import edu.utsa.cs3443.mealmatch.data.DataManager;
+import edu.utsa.cs3443.mealmatch.groq.GroqApiClientImpl;
 import edu.utsa.cs3443.mealmatch.model.Dish;
 import edu.utsa.cs3443.mealmatch.model.GroceryList;
 import edu.utsa.cs3443.mealmatch.model.MealPlan;
@@ -32,6 +37,7 @@ import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
 public class LoginActivity extends AppCompatActivity {
 
+    @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -80,44 +80,80 @@
                 android:textStyle="italic"
                 android:gravity="center" />
 
-            <View
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/gray"
-                android:layout_marginVertical="15dp"
-                android:layout_marginHorizontal="30dp"/>
-            <LinearLayout
-                android:id="@+id/layout_add_all_ingredient"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="10dp"
-                android:layout_marginBottom="-10dp">
-                <ImageView
-                    android:layout_marginStart="30dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_shoppping"/>
-                <TextView
-                    android:id="@+id/txt_ingredient"
-                    android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/emphasize_dark"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textSize="16sp"
-                    android:text="@string/label_add_all_ingredients"/>
-            </LinearLayout>
+                    android:orientation="vertical">
 
-            <!-- RecyclerView -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="10dp"/>
+                    <!-- Add All Button -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/gray"
+                        android:layout_marginVertical="15dp"
+                        android:layout_marginHorizontal="30dp"/>
+                    <LinearLayout
+                        android:id="@+id/layout_add_all_ingredient"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="10dp"
+                        android:layout_marginBottom="-10dp">
+                        <ImageView
+                            android:layout_marginStart="30dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_shoppping"/>
+                        <TextView
+                            android:id="@+id/txt_ingredient"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/emphasize_dark"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textSize="16sp"
+                            android:text="@string/label_add_all_ingredients"/>
+                    </LinearLayout>
+
+                    <!-- RecyclerView -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="10dp"
+                        android:paddingHorizontal="10dp"
+                        android:paddingBottom="10dp"/>
+
+                    <EditText
+                        android:id="@+id/txt_user_prompt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="20dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:layout_marginVertical="20dp"
+                        android:textSize="14sp"
+                        android:textColorHint="@color/emphasize_dark"
+                        android:textColor="@color/emphasize_dark"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Tell A.I how do you want to cook this dish?"
+                        android:background="@drawable/txt_grounded_border"/>
+                    <TextView
+                        android:id="@+id/txt_ai_response"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="16sp"
+                        android:textColor="@color/emphasize_dark"
+                        android:fontFamily="@font/poppins_regular"/>
+                </LinearLayout>
+            </ScrollView>
+
+
         </LinearLayout>
     </LinearLayout>
 
