@@ -66,10 +66,6 @@ public class SearchResultActivity extends AppCompatActivity {
 
 
                 if (!searchTerm.isEmpty()) {
-//                    Intent intent = new Intent(SearchResultActivity.this, SearchResultActivity.class);
-//                    intent.putExtra("search_term", searchTerm);
-//                    startActivity(intent);
-//                    finish();
                     setTitle(searchTerm);
                     setSearchDishes(searchTerm);
                 }
