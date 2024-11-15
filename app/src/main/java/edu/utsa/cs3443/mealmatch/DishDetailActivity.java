@@ -196,7 +196,7 @@ public class DishDetailActivity extends AppCompatActivity {
                 .append(dish.toString())
                 .append(". Provide detailed step-by-step instructions on how to cook it, including exact times for each step. ")
                 .append("The response must be purely in HTML format. Use appropriate HTML tags like <b> for bold and <ul>/<li> for lists. ")
-                .append("Do not use markdown or any other format. Ensure the content is short and concise. ")
+                .append("Do not use markdown or any other format.")
                 .append("Additionally, please ")
                 .append(userInput)
                 .append(".");
