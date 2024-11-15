@@ -11,6 +11,7 @@
 - 🛍️ **Smart Grocery Lists**: Automatically generate grocery lists based on your selected recipes.
 - 🌄 **Smooth Image Loading**: Powered by `Glide`, ensuring fast and efficient image rendering.
 - 🔍 **Real-time Search**: Quickly find your favorite recipes with a search bar.
+- 🤖 **AI-Powered Instructions**: Generate detailed cooking steps using Groq API AI for precision and speed.
 - 🖥️ **User-Friendly Interface**: Simple, sleek, and easy to navigate.
 - ✨ **Interactive UI**: Tap, swipe, and manage meals effortlessly.
 
@@ -20,6 +21,7 @@
 
 - **Android Studio**: Primary development environment.
 - **Java**: Core programming language.
+- **Groq AI**: For generating recipe instructions and insights.
 - **Glide**: Image loading and caching.
 - **RecyclerView**: Efficient list and grid display.
 
@@ -59,6 +61,7 @@ For any inquiries, reach out to me at:
 ## ⭐ Acknowledgements
 - Icons from [FlatIcon](https://www.flaticon.com/) and Images from [Unplash](https://unsplash.com/).
 - Special thanks to [Glide](https://github.com/bumptech/glide) for seamless image handling.
+- Powered by [Groq API](https://groq.com/) for AI insights and [Kornkutan](https://github.com/kornkutan/groq4j) for an interface to interact with Groq API.
 
 
 
