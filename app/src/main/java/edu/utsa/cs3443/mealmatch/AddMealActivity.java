@@ -60,14 +60,46 @@ public class AddMealActivity extends AppCompatActivity {
 
                 String searchTerm = txtSearch.getText().toString().trim().toLowerCase();
                 if (!searchTerm.isEmpty()) {
-                    Intent intent = new Intent(AddMealActivity.this, AddMealSearchActivity.class);
-                    intent.putExtra("search_term", searchTerm);
-                    startActivity(intent);
+                    setSearchDishes(searchTerm);
                 }
                 return true;
             }
             return false;
         });
+    }
+
+    private void setSearchDishes(String searchTerm){
+        // Create a clone list, then shuffle, then pick random 5 dihes
+        ArrayList<Dish> dishData = new ArrayList<>(DataManager.getInstance().getDishes().values());
+        ArrayList<Dish> setList = new ArrayList<>();
+
+        for (Dish dish : dishData){
+            if (dish.getName().toLowerCase().contains(searchTerm)){
+                setList.add(dish);
+            }
+        }
+
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        // Add ItemDecoration for vertical spacing
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.top = 10; // Top margin
+                outRect.bottom = 10; // Bottom margin
+            }
+        });
+
+        // Initialize Player List and Adapter
+        dishAdapter = new HorizontalDishAdapter(this, setList, dish -> {
+            Intent intent = new Intent(this, DishDetailActivity.class);
+            intent.putExtra("dish_id", dish.getID());
+            startActivity(intent);
+        });
+        recyclerView.setAdapter(dishAdapter);
     }
 
     private void recommendDishes(){
@@ -100,10 +132,10 @@ public class AddMealActivity extends AppCompatActivity {
         recyclerView.setAdapter(dishAdapter);
     }
 
-    private void setGreeting(){
+    private void setGreeting() {
         TextView txtGreeting = findViewById(R.id.txt_greeting);
-        //" + UserManager.getInstance().getUser().getFirstname() + "
-        txtGreeting.setText("Hello ,\n here are meals to add");
+        String name = UserManager.getInstance().getUser().getFirstname();
+        txtGreeting.setText("Hello " + name + ",\n search meals to add");
     }
 
 
