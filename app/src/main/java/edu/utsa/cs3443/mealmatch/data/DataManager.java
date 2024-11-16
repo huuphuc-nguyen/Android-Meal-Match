@@ -405,4 +405,18 @@ public class DataManager {
                 .max(Integer::compareTo)
                 .orElse(0) + 1;
     }
+
+    public void removeTask(int taskID, Context context) {
+        // Remove the task from the tasks map
+        tasks.remove(taskID);
+
+        // Remove the task from all grocery lists
+        for (GroceryList groceryList : groceryLists.values()) {
+            groceryList.getTasks().remove(Integer.valueOf(taskID));
+        }
+
+        // Save the updated data to the files
+        saveTaskData(context);
+        saveGroceryListData(context);
+    }
 }
