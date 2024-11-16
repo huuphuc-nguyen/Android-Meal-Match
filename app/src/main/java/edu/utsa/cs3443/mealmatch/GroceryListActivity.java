@@ -1,12 +1,14 @@
 package edu.utsa.cs3443.mealmatch;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -141,11 +143,61 @@ public class GroceryListActivity extends AppCompatActivity {
         for (int taskID : taskIDs) {
             Task task = tasks.get(taskID);
             if (task != null) {
+                // Create a CardView for each task
+                androidx.cardview.widget.CardView cardView = new androidx.cardview.widget.CardView(this);
+                LinearLayout.LayoutParams cardLayoutParams = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                );
+                cardLayoutParams.setMargins(16, 16, 16, 16);
+                cardView.setLayoutParams(cardLayoutParams);
+                cardView.setRadius(16);
+                cardView.setCardBackgroundColor(getResources().getColor(R.color.background_primary));
+                cardView.setContentPadding(16, 16, 16, 16);
+                cardView.setMaxCardElevation(8);
+                cardView.setCardElevation(4);
+
+                // Create a LinearLayout to hold the task details and delete button
+                LinearLayout taskLayout = new LinearLayout(this);
+                taskLayout.setOrientation(LinearLayout.HORIZONTAL);
+                taskLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+
+                // Create a TextView for the task details
                 TextView taskView = new TextView(this);
                 taskView.setText(task.getName() + " - " + task.getType());
                 taskView.setTextSize(18);
                 taskView.setTextColor(getResources().getColor(R.color.emphasize_dark));
-                taskList.addView(taskView);
+                taskView.setLayoutParams(new LinearLayout.LayoutParams(
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
+                ));
+
+                // Create an ImageButton for deleting the task
+                ImageButton deleteButton = new ImageButton(this);
+                deleteButton.setImageResource(R.drawable.ic_trash);
+                deleteButton.setBackgroundColor(Color.TRANSPARENT);
+                deleteButton.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                LinearLayout.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(100, 100); // Set width and height
+                deleteButton.setLayoutParams(buttonLayoutParams);
+                deleteButton.setOnClickListener(view -> {
+                    userGList.getTasks().remove(Integer.valueOf(taskID));
+                    DataManager.getInstance().removeTask(taskID, this);
+                    displayTasks();
+                });
+
+                // Add the TextView and ImageButton to the LinearLayout
+                taskLayout.addView(taskView);
+                taskLayout.addView(deleteButton);
+
+                // Add the LinearLayout to the CardView
+                cardView.addView(taskLayout);
+
+                // Add the CardView to the task list
+                taskList.addView(cardView);
             }
         }
     }
