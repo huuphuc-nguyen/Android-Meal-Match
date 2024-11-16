@@ -13,10 +13,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
 public class MealPlannerActivity extends AppCompatActivity {
 
+    private Date currentDate = new Date();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,26 +35,23 @@ public class MealPlannerActivity extends AppCompatActivity {
         });
 
 
-
-        addMeal();
+        setSelectedDate();
+        addMealBtn();
         traverseDates();
         setGreeting();
         tempNavigationHandle();
     }
 
-    private void addMeal() {
+    private void addMealBtn() {
         AppCompatButton addMeal_Btn = findViewById(R.id.btn_add_meal);
-
         addMeal_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // open search meal search activity to add meal?
+                Intent intent = new Intent(MealPlannerActivity.this, AddMealActivity.class);
+                intent.putExtra("selected_date", currentDate);
+                startActivity(intent);
             }
         });
-    }
-
-    private void removeMeal() {
-        // apart of recycler?
     }
 
     private void traverseDates() {
@@ -58,25 +61,44 @@ public class MealPlannerActivity extends AppCompatActivity {
         btn_priorDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // change current date to next date
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(currentDate);
+                calendar.add(Calendar.DAY_OF_MONTH, -1);
+                currentDate = calendar.getTime();
+                updateDateDisplay();
             }
         });
 
         btn_nextDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // change current date to prior date
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(currentDate);
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
+                currentDate = calendar.getTime();
+                updateDateDisplay();
             }
         });
     }
 
+    private void updateDateDisplay() {
+        TextView dateTextView = findViewById(R.id.txt_date);
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy", Locale.getDefault());
+        dateTextView.setText(formatter.format(currentDate));
+    }
 
     private void setGreeting(){
         TextView txtGreeting = findViewById(R.id.txt_greeting);
 
-        txtGreeting.setText("Hello " + UserManager.getInstance().getUser().getFirstname());
+        txtGreeting.setText("Hello " + UserManager.getInstance().getUser().getFirstname() + ", here's your meal plan for");
     }
 
+    private void setSelectedDate() {
+        TextView selectedDate = findViewById(R.id.txt_date);
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyy", Locale.getDefault());
+        String date = formatter.format(currentDate);
+        selectedDate.setText(date);
+    }
     private void tempNavigationHandle(){
         ImageButton btn_home = findViewById(R.id.btn_home);
         ImageButton btn_fav = findViewById(R.id.btn_favoriteDish);
