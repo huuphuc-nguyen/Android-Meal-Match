@@ -17,4 +17,6 @@
     <string name="task_name">Task Name</string>
     <string name="task_type">Task Type</string>
     <string name="add_item">Add Item +</string>
+    <string name="add_meal">Add Meal +</string>
+    <string name="current_date">Current Date</string>
 </resources>
