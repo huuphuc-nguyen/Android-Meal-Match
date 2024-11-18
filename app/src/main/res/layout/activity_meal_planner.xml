@@ -94,31 +94,38 @@
             </LinearLayout>
     </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
-            android:paddingHorizontal="10dp"
-            android:paddingBottom="10dp"/>
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:orientation="vertical">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="-10dp"/>
         <!-- add meal button need to properly center -->
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_add_meal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_grounded"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/add_meal"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginHorizontal="145dp"
-            android:textColor="@android:color/white"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_add_meal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_grounded"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="@string/add_meal"
+                    android:layout_marginTop="-5dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginHorizontal="145dp"
+                    android:textColor="@android:color/white"/>
         </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
     </LinearLayout>
-
-
-
-
+    </LinearLayout>
     <View
         android:id="@+id/top_border"
         android:layout_width="match_parent"

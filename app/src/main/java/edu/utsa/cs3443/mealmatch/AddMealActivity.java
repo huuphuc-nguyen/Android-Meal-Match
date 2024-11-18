@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import edu.utsa.cs3443.mealmatch.adapter.AddMealAdapter;
 import edu.utsa.cs3443.mealmatch.adapter.HorizontalDishAdapter;
 import edu.utsa.cs3443.mealmatch.data.DataManager;
 import edu.utsa.cs3443.mealmatch.model.Dish;
@@ -29,7 +31,7 @@ import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
 public class AddMealActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private HorizontalDishAdapter dishAdapter;
+    private AddMealAdapter dishAdapter;
     private ArrayList<Dish> showDishList;
 
     @Override
@@ -49,6 +51,7 @@ public class AddMealActivity extends AppCompatActivity {
         tempNavigationHandle();
         recommendDishes();
         searchBarHandler();
+        setButtons();
     }
 
     private void searchBarHandler(){
@@ -65,6 +68,17 @@ public class AddMealActivity extends AppCompatActivity {
                 return true;
             }
             return false;
+        });
+    }
+
+    private void setButtons(){
+        ImageView btn_back = findViewById(R.id.btn_back);
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
         });
     }
 
@@ -94,7 +108,7 @@ public class AddMealActivity extends AppCompatActivity {
         });
 
         // Initialize Player List and Adapter
-        dishAdapter = new HorizontalDishAdapter(this, setList, dish -> {
+        dishAdapter = new AddMealAdapter(this, setList, dish -> {
             Intent intent = new Intent(this, DishDetailActivity.class);
             intent.putExtra("dish_id", dish.getID());
             startActivity(intent);
@@ -124,7 +138,7 @@ public class AddMealActivity extends AppCompatActivity {
         });
 
         // Initialize Player List and Adapter
-        dishAdapter = new HorizontalDishAdapter(this, showDishList, dish -> {
+        dishAdapter = new AddMealAdapter(this, showDishList, dish -> {
             Intent intent = new Intent(this, DishDetailActivity.class);
             intent.putExtra("dish_id", dish.getID());
             startActivity(intent);
