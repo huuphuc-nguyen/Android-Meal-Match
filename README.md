@@ -27,12 +27,9 @@
 
 ---
 
-## 📸 Screenshots
+## 📽️ Demo Video
 
-// TODO: Update Screenshot links
-![Home Screen](link-to-screenshot-1)
-![Recipe Details](link-to-screenshot-2)
-![Grocery List](link-to-screenshot-3)
+- Visit youtube link [here](https://www.youtube.com/watch?v=GvfcqAoC3kg&feature=youtu.be) for a full demo of our application.
 
 ---
 
