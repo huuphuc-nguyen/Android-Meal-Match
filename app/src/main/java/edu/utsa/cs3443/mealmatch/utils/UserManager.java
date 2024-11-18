@@ -78,5 +78,13 @@ public class UserManager {
         user.getFavoriteDishes().remove(Integer.valueOf(id));
         DataManager.getInstance().updateUser(context);
     }
+
+    public void addDishToMealPlan(int dishID, Context context) {
+        // add meal
+    }
+
+    public void removeDishFromMealPlan(int dishID, Context context) {
+        // remove meal
+    }
 }
 

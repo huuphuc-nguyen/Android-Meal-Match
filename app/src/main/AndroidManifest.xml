@@ -39,6 +39,10 @@
             android:exported="false"
             android:theme="@style/Theme.MealMatch" />
         <activity
+            android:name=".AddMealActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MealMatch"/>
+        <activity
             android:name=".FavoriteDishesActivity"
             android:exported="false"
             android:theme="@style/Theme.MealMatch" />
