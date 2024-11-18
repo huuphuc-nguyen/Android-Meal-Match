@@ -37,6 +37,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#80000000" />
+            <ImageView
+                android:id="@+id/btn_back"
+                android:src="@drawable/ic_backward"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/background_primary"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp" />
             <TextView
                 android:id="@+id/txt_greeting"
                 android:layout_width="wrap_content"
