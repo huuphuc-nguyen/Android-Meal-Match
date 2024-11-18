@@ -5,30 +5,33 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchResultActivity">
+    tools:context=".AddMealActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/top_border"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/background_primary">
-
-        <!-- Top Image with Overlay -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/background_primary">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="200dp">
-
             <ImageView
                 android:id="@+id/topImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/background_login"
-                android:scaleType="centerCrop" />
-
+                android:src="@drawable/background_meal_plan"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
             <View
                 android:id="@+id/overlay"
                 android:layout_width="match_parent"
@@ -43,16 +46,18 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="15dp" />
             <TextView
-                android:id="@+id/txt_search_result_for"
-                android:layout_width="match_parent"
+                android:id="@+id/txt_greeting"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semibold"
-                tools:text="Search result for: abc"
-                android:textColor="@color/background_primary"
-                android:textSize="18sp"
-                android:layout_marginTop="50dp"
+                android:layout_gravity="center"
                 android:gravity="center"
-                android:layout_marginStart="10dp" />
+                tools:text="Hello User,\n here are meals to add"
+                android:textColor="@color/background_primary"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="20sp"
+                android:layout_marginTop="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="50dp"/>
             <EditText
                 android:background="@drawable/txt_grounded"
                 android:id="@+id/txt_search"
@@ -68,15 +73,6 @@
                 android:layout_marginBottom="50dp"/>
         </RelativeLayout>
 
-        <!-- Search Result Text -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingTop="30dp">
-        </LinearLayout>
-
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -84,6 +80,9 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp" />
     </LinearLayout>
+    </LinearLayout>
+
+
 
     <!-- Navigation Menu -->
     <View
@@ -101,18 +100,14 @@
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageButton
             android:id="@+id/btn_home"
-            android:layout_width="84dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/button_grounded"
-            android:drawableLeft="@drawable/ic_home"
-            android:drawableTint="@color/background_primary"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:textColor="@color/background_primary" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="24dp"
+            android:src="@drawable/ic_home" />
 
         <ImageButton
             android:id="@+id/btn_favoriteDish"
@@ -123,14 +118,18 @@
             android:padding="24dp"
             android:src="@drawable/ic_heart" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_mealPlanner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="24dp"
-            android:src="@drawable/ic_calendar" />
+            android:layout_width="84dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/button_grounded"
+            android:drawableLeft="@drawable/ic_calendar"
+            android:drawableTint="@color/background_primary"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:textColor="@color/background_primary" />
 
         <ImageButton
             android:id="@+id/btn_groceryList"

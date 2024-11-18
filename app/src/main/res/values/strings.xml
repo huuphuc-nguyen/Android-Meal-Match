@@ -2,14 +2,23 @@
     <string name="app_name">Meal Match</string>
     <string name="btn_login">Log in</string>
     <string name="label_welcome">Welcome</string>
-    <string name="hint_email">Email</string>
+    <string name="hint_username">Username</string>
     <string name="hint_firstname">First name</string>
     <string name="hint_lastname">Last name</string>
+    <string name="hint_ai">Tell A.I how do you want to cook the dish</string>
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm Password</string>
-    <string name="hint_searchformeals">Search for your meals</string>
+    <string name="hint_searchformeals">Search for dishes</string>
     <string name="btn_signup">Sign up</string>
     <string name="label_do_not_have_an_account">Don\'t have an account?</string>
+    <string name="label_Welcome">Your Favorites</string>
     <string name="label_recommended">Recommend Dishes</string>
+    <string name="label_favorites">Favorites Dishes</string>
     <string name="label_add_all_ingredients">Add All to Shopping List</string>
+    <string name="grocery_list">Here are your tasks…</string>
+    <string name="task_name">Task Name</string>
+    <string name="task_type">Task Type</string>
+    <string name="add_item">Add Item +</string>
+    <string name="add_meal">Add Meal +</string>
+    <string name="current_date">Current Date</string>
 </resources>

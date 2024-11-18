@@ -236,6 +236,11 @@ public class DataManager {
         saveMealPlanData(context);
     }
 
+    public void removeTask(Task task, Context context){
+        tasks.remove(task.getID());
+        saveTaskData(context);
+    }
+
     public void addTask(Task task, Context context){
         tasks.put(task.getID(), task);
         saveTaskData(context);
@@ -353,6 +358,10 @@ public class DataManager {
         }
     }
 
+    public void updateTask(Context context){
+        saveTaskData(context);
+    }
+
     public void updateUser(Context context){
         saveUserData(context);
     }
@@ -395,5 +404,19 @@ public class DataManager {
         return mealPlans.keySet().stream()
                 .max(Integer::compareTo)
                 .orElse(0) + 1;
+    }
+
+    public void removeTask(int taskID, Context context) {
+        // Remove the task from the tasks map
+        tasks.remove(taskID);
+
+        // Remove the task from all grocery lists
+        for (GroceryList groceryList : groceryLists.values()) {
+            groceryList.getTasks().remove(Integer.valueOf(taskID));
+        }
+
+        // Save the updated data to the files
+        saveTaskData(context);
+        saveGroceryListData(context);
     }
 }
