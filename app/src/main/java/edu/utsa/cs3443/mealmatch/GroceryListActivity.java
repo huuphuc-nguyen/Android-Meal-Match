@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.CheckBox;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -165,6 +166,14 @@ public class GroceryListActivity extends AppCompatActivity {
                         LinearLayout.LayoutParams.WRAP_CONTENT
                 ));
 
+                // Create a CheckBox for the task
+                CheckBox taskCheckBox = new CheckBox(this);
+                taskCheckBox.setChecked(task.isDone());
+                taskCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    task.setDone(isChecked);
+                    DataManager.getInstance().updateTask(this);
+                });
+
                 // Create a TextView for the task details
                 TextView taskView = new TextView(this);
                 taskView.setText(task.getName() + " - " + task.getType());
@@ -189,7 +198,8 @@ public class GroceryListActivity extends AppCompatActivity {
                     displayTasks();
                 });
 
-                // Add the TextView and ImageButton to the LinearLayout
+                // Add the CheckBox, TextView, and ImageButton to the LinearLayout
+                taskLayout.addView(taskCheckBox);
                 taskLayout.addView(taskView);
                 taskLayout.addView(deleteButton);
 
@@ -204,32 +214,5 @@ public class GroceryListActivity extends AppCompatActivity {
 
 
 
-// DEPRECATED METHODS
-    // TODO DELETE THIS METHOD LATER IF NOT NEEDED
-//    private void displayTasks() {
-//        LinearLayout taskList = findViewById(R.id.task_list);
-//        taskList.removeAllViews(); // Clear any existing views
-//
-//        GroceryList userGList = DataManager.getInstance().getGroceryListById(UserManager.getInstance().getUser().getGroceryID());
-//        ArrayList<Integer> taskIDs = userGList.getTasks();
-//
-//        Map<Integer, Task> tasks = DataManager.getInstance().getTasks();
-//        Log.d("GroceryListActivity", "Number of tasks: " + tasks.size());
-//
-//
-////        for (int taskID : taskIDs) {
-////            for (Task task : tasks.values()){
-////                if (task.getID() == taskID){
-////                    TextView taskView = new TextView(this);
-////                    taskView.setText(task.getName() + " - " + task.getType());
-////                    taskView.setTextSize(18);
-////                    taskView.setTextColor(getResources().getColor(R.color.emphasize_dark));
-////                    taskList.addView(taskView);
-////                }
-////            }
-////        }
-
-
 
 }
-
