@@ -1,5 +1,10 @@
 package edu.utsa.cs3443.mealmatch.utils;
 
+import android.content.Context;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,4 +42,20 @@ public class HelperFunctions {
             return null;
         }
     }
+
+    public static void copyFileFromAssets(Context context, String assetFileName, String outputFileName) {
+        try (InputStream is = context.getAssets().open(assetFileName);
+             OutputStream os = context.openFileOutput(outputFileName, Context.MODE_PRIVATE)) {
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

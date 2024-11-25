@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
@@ -15,24 +14,22 @@ public class User {
     private String lastname;
     private Integer groceryID;
     private HashSet<Integer> favoriteDishes;
-    private ArrayList<Integer> mealPlans;
+    private HashSet<Integer> mealPlans; // Changed from ArrayList to HashSet
 
     // This Constructor is used in Signup Activity when creating new user
-    public User(String email, String password, String firstname, String lastname){
+    public User(String email, String password, String firstname, String lastname) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
         this.groceryID = 0;
         this.favoriteDishes = new HashSet<>();
-        this.mealPlans = new ArrayList<>();
-        this.mealPlans.add(0);
-        // add 0 inorder to initialize enough a mount of fields
-        // when writing a new user to the file
+        this.mealPlans = new HashSet<>();
+        this.mealPlans.add(0); // Add 0 to initialize the HashSet with a default value
     }
 
     // This Constructor is used in Data Manager to map stored data to object user
-    public User(String email, String password, String firstname, String lastname, Integer groceryID, HashSet<Integer> favoriteDishes, ArrayList<Integer> mealPlans) {
+    public User(String email, String password, String firstname, String lastname, Integer groceryID, HashSet<Integer> favoriteDishes, HashSet<Integer> mealPlans) {
         this.email = email;
         this.password = password;
         this.firstname = firstname;
@@ -90,11 +87,11 @@ public class User {
         this.favoriteDishes = favoriteDishes;
     }
 
-    public ArrayList<Integer> getMealPlans() {
+    public HashSet<Integer> getMealPlans() { // Updated getter
         return mealPlans;
     }
 
-    public void setMealPlans(ArrayList<Integer> mealPlans) {
+    public void setMealPlans(HashSet<Integer> mealPlans) { // Updated setter
         this.mealPlans = mealPlans;
     }
 
