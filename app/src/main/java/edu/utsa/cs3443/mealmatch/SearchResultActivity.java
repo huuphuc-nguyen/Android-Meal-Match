@@ -63,8 +63,6 @@ public class SearchResultActivity extends AppCompatActivity {
 
                 String searchTerm = txtSearch.getText().toString().trim().toLowerCase();
 
-
-
                 if (!searchTerm.isEmpty()) {
                     setTitle(searchTerm);
                     setSearchDishes(searchTerm);

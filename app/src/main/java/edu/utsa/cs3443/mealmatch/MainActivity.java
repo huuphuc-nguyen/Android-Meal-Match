@@ -146,9 +146,6 @@ public class MainActivity extends AppCompatActivity {
                                 .get("content").getAsString().trim();
 
                         String[] parseID = completion.split("\\s+");
-                        Log.e("TAG",completion);
-                        Log.e("TAG",parseID[1]);
-
 
                         runOnUiThread(() -> {
                             showDishList = new ArrayList<>();

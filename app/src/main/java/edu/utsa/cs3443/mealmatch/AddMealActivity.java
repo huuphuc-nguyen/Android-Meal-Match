@@ -3,6 +3,7 @@ package edu.utsa.cs3443.mealmatch;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -33,6 +34,7 @@ public class AddMealActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AddMealAdapter dishAdapter;
     private ArrayList<Dish> showDishList;
+    private int currentMealID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +47,7 @@ public class AddMealActivity extends AppCompatActivity {
             return insets;
         });
 
-
-        Intent intent = getIntent();
+        currentMealID = getIntent().getIntExtra("meal_id", 0);
         setGreeting();
         tempNavigationHandle();
         recommendDishes();
@@ -112,7 +113,7 @@ public class AddMealActivity extends AppCompatActivity {
             Intent intent = new Intent(this, DishDetailActivity.class);
             intent.putExtra("dish_id", dish.getID());
             startActivity(intent);
-        });
+        }, currentMealID);
         recyclerView.setAdapter(dishAdapter);
     }
 
@@ -142,7 +143,7 @@ public class AddMealActivity extends AppCompatActivity {
             Intent intent = new Intent(this, DishDetailActivity.class);
             intent.putExtra("dish_id", dish.getID());
             startActivity(intent);
-        });
+        }, currentMealID);
         recyclerView.setAdapter(dishAdapter);
     }
 
@@ -151,8 +152,6 @@ public class AddMealActivity extends AppCompatActivity {
         String name = UserManager.getInstance().getUser().getFirstname();
         txtGreeting.setText("Hello " + name + ",\n search meals to add");
     }
-
-
 
     private void tempNavigationHandle(){
         ImageButton btn_home = findViewById(R.id.btn_home);

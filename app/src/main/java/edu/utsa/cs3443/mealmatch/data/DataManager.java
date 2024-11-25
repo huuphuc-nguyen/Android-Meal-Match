@@ -1,8 +1,11 @@
 package edu.utsa.cs3443.mealmatch.data;
 
+import static edu.utsa.cs3443.mealmatch.utils.HelperFunctions.copyFileFromAssets;
+
 import android.content.Context;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -77,6 +80,13 @@ public class DataManager {
     // READING FILE FUNCTIONS
     private void loadUsersFile(Context context){
         String filename = Constant.USERS_FILE;
+
+        // Check if file exists in internal storage
+        File file = new File(context.getFilesDir(), filename);
+        if (!file.exists()) {
+            copyFileFromAssets(context, filename, filename);
+        }
+
         try {
             InputStream is = context.openFileInput(filename);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -99,7 +109,7 @@ public class DataManager {
                 HashSet<Integer> favoriteDishes = new HashSet<>(HelperFunctions.parseIntegerList(columns[4].trim(), ";"));
 
                 // Parse mealPlans (splitting by ";")
-                ArrayList<Integer> mealPlans = HelperFunctions.parseIntegerList(columns[6].trim(), ";");
+                HashSet<Integer> mealPlans = new HashSet<>(HelperFunctions.parseIntegerList(columns[6].trim(), ";"));
 
                 User user = new User(email, password, firstname, lastname, groceryID, favoriteDishes, mealPlans);
                 users.put(email, user);
@@ -111,6 +121,13 @@ public class DataManager {
 
     private void loadDishesFile(Context context) {
         String filename = Constant.DISHES_FILE;
+
+        // Check if file exists in internal storage
+        File file = new File(context.getFilesDir(), filename);
+        if (!file.exists()) {
+            copyFileFromAssets(context, filename, filename);
+        }
+
         try {
             InputStream is = context.openFileInput(filename);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -144,6 +161,13 @@ public class DataManager {
 
     private void loadGroceryListsFile(Context context){
         String filename = Constant.GROCERY_LIST_FILE;
+
+        // Check if file exists in internal storage
+        File file = new File(context.getFilesDir(), filename);
+        if (!file.exists()) {
+            copyFileFromAssets(context, filename, filename);
+        }
+
         try {
             InputStream is = context.openFileInput(filename);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -170,6 +194,13 @@ public class DataManager {
 
     private void loadTasksFile(Context context){
         String filename = Constant.TASKS_FILE;
+
+        // Check if file exists in internal storage
+        File file = new File(context.getFilesDir(), filename);
+        if (!file.exists()) {
+            copyFileFromAssets(context, filename, filename);
+        }
+
         try {
             InputStream is = context.openFileInput(filename);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -199,6 +230,13 @@ public class DataManager {
 
     public void loadMealPlanFile(Context context){
         String filename = Constant.MEAL_PLANS_FILE;
+
+        // Check if file exists in internal storage
+        File file = new File(context.getFilesDir(), filename);
+        if (!file.exists()) {
+            copyFileFromAssets(context, filename, filename);
+        }
+
         try {
             InputStream is = context.openFileInput(filename);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
