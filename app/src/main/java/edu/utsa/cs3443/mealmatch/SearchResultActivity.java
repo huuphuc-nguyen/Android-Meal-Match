@@ -48,9 +48,13 @@ public class SearchResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String searchTerm = intent.getStringExtra("search_term");
 
+        // Set the search term for the search bar when this screen is first time navigated
+        EditText txtSearch = findViewById(R.id.txt_search);
+        txtSearch.setText(searchTerm);
+
         setSearchDishes(searchTerm);
         setTitle(searchTerm);
-        tempNavigationHandle();
+        setupNavigationButtons();
         setButtons();
         searchBarHandler();
     }
@@ -63,8 +67,6 @@ public class SearchResultActivity extends AppCompatActivity {
 
                 String searchTerm = txtSearch.getText().toString().trim().toLowerCase();
 
-
-
                 if (!searchTerm.isEmpty()) {
                     setTitle(searchTerm);
                     setSearchDishes(searchTerm);
@@ -75,32 +77,10 @@ public class SearchResultActivity extends AppCompatActivity {
         });
     }
 
-
-    private void tempNavigationHandle(){
-        ImageButton btn_fav = findViewById(R.id.btn_favoriteDish);
-        ImageButton btn_plan = findViewById(R.id.btn_mealPlanner);
-        ImageButton btn_list = findViewById(R.id.btn_groceryList);
-
-        btn_fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SearchResultActivity.this, FavoriteDishesActivity.class));
-            }
-        });
-
-        btn_plan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SearchResultActivity.this, MealPlannerActivity.class));
-            }
-        });
-
-        btn_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(SearchResultActivity.this, GroceryListActivity.class));
-            }
-        });
+    private void setupNavigationButtons(){
+        findViewById(R.id.btn_favoriteDish).setOnClickListener(view -> startActivity(new Intent(SearchResultActivity.this, FavoriteDishesActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_mealPlanner).setOnClickListener(view -> startActivity(new Intent(SearchResultActivity.this, MealPlannerActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_groceryList).setOnClickListener(view -> startActivity(new Intent(SearchResultActivity.this, GroceryListActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
     }
 
     private void setButtons(){

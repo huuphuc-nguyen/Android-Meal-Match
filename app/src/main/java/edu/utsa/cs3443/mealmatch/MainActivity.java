@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        tempNavigationHandle();
+        setupNavigationButtons();
         updateRecyclerView();
 
         initializeRecommendDishes();
@@ -72,31 +73,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void tempNavigationHandle(){
-        ImageButton btn_fav = findViewById(R.id.btn_favoriteDish);
-        ImageButton btn_plan = findViewById(R.id.btn_mealPlanner);
-        ImageButton btn_list = findViewById(R.id.btn_groceryList);
-
-        btn_fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, FavoriteDishesActivity.class));
-            }
-        });
-
-        btn_plan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, MealPlannerActivity.class));
-            }
-        });
-
-        btn_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, GroceryListActivity.class));
-            }
-        });
+    private void setupNavigationButtons(){
+        findViewById(R.id.btn_favoriteDish).setOnClickListener(view -> startActivity(new Intent(MainActivity.this, FavoriteDishesActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_mealPlanner).setOnClickListener(view -> startActivity(new Intent(MainActivity.this, MealPlannerActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_groceryList).setOnClickListener(view -> startActivity(new Intent(MainActivity.this, GroceryListActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
     }
 
     @SuppressLint("CheckResult")
@@ -146,9 +126,6 @@ public class MainActivity extends AppCompatActivity {
                                 .get("content").getAsString().trim();
 
                         String[] parseID = completion.split("\\s+");
-                        Log.e("TAG",completion);
-                        Log.e("TAG",parseID[1]);
-
 
                         runOnUiThread(() -> {
                             showDishList = new ArrayList<>();
@@ -224,6 +201,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         // Reload data to reflect updated favorites from search
-       // dishAdapter.updateData(showDishList);
+        if (showDishList != null) {
+            dishAdapter.updateData(showDishList);
+        }
     }
 }

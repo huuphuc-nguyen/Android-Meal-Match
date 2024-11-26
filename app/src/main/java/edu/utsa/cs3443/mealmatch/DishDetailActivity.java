@@ -140,13 +140,9 @@ public class DishDetailActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
     private void setUpButtons(){
-        ImageView btn_back = findViewById(R.id.btn_back);
-        ImageButton btn_fav = findViewById(R.id.btn_favoriteDish);
-        ImageButton btn_plan = findViewById(R.id.btn_mealPlanner);
-        ImageButton btn_list = findViewById(R.id.btn_groceryList);
-        LinearLayout btn_add_all = findViewById(R.id.layout_add_all_ingredient);
 
-        btn_add_all.setOnClickListener(new View.OnClickListener() {
+        // Add all button
+        findViewById(R.id.layout_add_all_ingredient).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 for (String ingredient : dish.getIngredients()){
@@ -156,33 +152,13 @@ public class DishDetailActivity extends AppCompatActivity {
             }
         });
 
-        btn_fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DishDetailActivity.this, FavoriteDishesActivity.class));
-            }
-        });
+        // Navigation Bar
+        findViewById(R.id.btn_favoriteDish).setOnClickListener(view -> startActivity(new Intent(DishDetailActivity.this, FavoriteDishesActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_mealPlanner).setOnClickListener(view -> startActivity(new Intent(DishDetailActivity.this, MealPlannerActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_groceryList).setOnClickListener(view -> startActivity(new Intent(DishDetailActivity.this, GroceryListActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
 
-        btn_plan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DishDetailActivity.this, MealPlannerActivity.class));
-            }
-        });
-
-        btn_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DishDetailActivity.this, GroceryListActivity.class));
-            }
-        });
-
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        // Back Button
+        findViewById(R.id.btn_back).setOnClickListener(view -> finish());
     }
 
     @SuppressLint("CheckResult")
