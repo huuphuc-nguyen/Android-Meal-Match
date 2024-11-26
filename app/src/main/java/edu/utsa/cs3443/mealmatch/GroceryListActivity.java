@@ -51,40 +51,15 @@ public class GroceryListActivity extends AppCompatActivity {
         displayTasks();
 
         addTask();
-        tempNavigationHandle();
-
-
+        setupNavigationButtons();
     }
 
     // Navigation buttons
-    private void tempNavigationHandle(){
-        ImageButton btn_home = findViewById(R.id.btn_home);
-        ImageButton btn_plan = findViewById(R.id.btn_mealPlanner);
-        ImageButton btn_fav = findViewById(R.id.btn_favoriteDish);
-
-        // Navigate to home
-        btn_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(GroceryListActivity.this, MainActivity.class));
-            }
-        });
-
-        // Navigate to meal plan
-        btn_plan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(GroceryListActivity.this, MealPlannerActivity.class));
-            }
-        });
-
-        // Navigate to favorite dishes
-        btn_fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(GroceryListActivity.this, FavoriteDishesActivity.class));
-            }
-        });
+    private void setupNavigationButtons() {
+        findViewById(R.id.btn_home).setOnClickListener(view -> startActivity(new Intent(GroceryListActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_mealPlanner).setOnClickListener(view -> startActivity(new Intent(GroceryListActivity.this, MealPlannerActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_favoriteDish).setOnClickListener(view -> startActivity(new Intent(GroceryListActivity.this, FavoriteDishesActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_back).setOnClickListener(view -> finish());
     }
 
     private void addTask() {

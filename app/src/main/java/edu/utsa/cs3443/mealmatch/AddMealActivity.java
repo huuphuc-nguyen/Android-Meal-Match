@@ -49,7 +49,7 @@ public class AddMealActivity extends AppCompatActivity {
 
         currentMealID = getIntent().getIntExtra("meal_id", 0);
         setGreeting();
-        tempNavigationHandle();
+        setupNavigationButtons();
         recommendDishes();
         searchBarHandler();
         setButtons();
@@ -153,31 +153,10 @@ public class AddMealActivity extends AppCompatActivity {
         txtGreeting.setText("Hello " + name + ",\n search meals to add");
     }
 
-    private void tempNavigationHandle(){
-        ImageButton btn_home = findViewById(R.id.btn_home);
-        ImageButton btn_fav = findViewById(R.id.btn_favoriteDish);
-        ImageButton btn_list = findViewById(R.id.btn_groceryList);
-
-        btn_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AddMealActivity.this, MainActivity.class));
-            }
-        });
-
-        btn_fav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AddMealActivity.this, FavoriteDishesActivity.class));
-            }
-        });
-
-        btn_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AddMealActivity.this, GroceryListActivity.class));
-            }
-        });
+    private void setupNavigationButtons(){
+        findViewById(R.id.btn_favoriteDish).setOnClickListener(view -> startActivity(new Intent(AddMealActivity.this, FavoriteDishesActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_home).setOnClickListener(view -> startActivity(new Intent(AddMealActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_groceryList).setOnClickListener(view -> startActivity(new Intent(AddMealActivity.this, GroceryListActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
     }
 }
 

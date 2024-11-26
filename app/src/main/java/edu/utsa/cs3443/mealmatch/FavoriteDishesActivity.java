@@ -42,7 +42,7 @@ public class FavoriteDishesActivity extends AppCompatActivity {
         });
 
         // Initialize navigation buttons
-        tempNavigationHandle();
+        setupNavigationButtons();
 
         // Initialize search bar functionality
         searchBarHandler();
@@ -142,15 +142,10 @@ public class FavoriteDishesActivity extends AppCompatActivity {
         recyclerView.setAdapter(dishAdapter);
     }
 
-    private void tempNavigationHandle() {
-        ImageButton btn_home = findViewById(R.id.btn_home);
-        ImageButton btn_plan = findViewById(R.id.btn_mealPlanner);
-        ImageButton btn_list = findViewById(R.id.btn_groceryList);
-
-        btn_home.setOnClickListener(view -> startActivity(new Intent(FavoriteDishesActivity.this, MainActivity.class)));
-
-        btn_plan.setOnClickListener(view -> startActivity(new Intent(FavoriteDishesActivity.this, MealPlannerActivity.class)));
-
-        btn_list.setOnClickListener(view -> startActivity(new Intent(FavoriteDishesActivity.this, GroceryListActivity.class)));
+    private void setupNavigationButtons() {
+        findViewById(R.id.btn_home).setOnClickListener(view -> startActivity(new Intent(FavoriteDishesActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_mealPlanner).setOnClickListener(view -> startActivity(new Intent(FavoriteDishesActivity.this, MealPlannerActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_groceryList).setOnClickListener(view -> startActivity(new Intent(FavoriteDishesActivity.this, GroceryListActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_back).setOnClickListener(view -> finish());
     }
 }
