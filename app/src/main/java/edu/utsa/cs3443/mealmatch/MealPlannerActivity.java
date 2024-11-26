@@ -201,10 +201,11 @@ public class MealPlannerActivity extends AppCompatActivity {
         selectedDate.setText(displayDateFormat.format(currentDate));
     }
 
-    private void setupNavigationButtons() {
-        findViewById(R.id.btn_home).setOnClickListener(view -> startActivity(new Intent(this, MainActivity.class)));
-        findViewById(R.id.btn_favoriteDish).setOnClickListener(view -> startActivity(new Intent(this, FavoriteDishesActivity.class)));
-        findViewById(R.id.btn_groceryList).setOnClickListener(view -> startActivity(new Intent(this, GroceryListActivity.class)));
+    private void setupNavigationButtons(){
+        findViewById(R.id.btn_home).setOnClickListener(view -> startActivity(new Intent(MealPlannerActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_favoriteDish).setOnClickListener(view -> startActivity(new Intent(MealPlannerActivity.this, FavoriteDishesActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_groceryList).setOnClickListener(view -> startActivity(new Intent(MealPlannerActivity.this, GroceryListActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
+        findViewById(R.id.btn_back).setOnClickListener(view -> finish());
     }
 
     @Override
