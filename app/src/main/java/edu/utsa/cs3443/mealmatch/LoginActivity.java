@@ -35,38 +35,24 @@ import edu.utsa.cs3443.mealmatch.model.Task;
 import edu.utsa.cs3443.mealmatch.model.User;
 import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
-/**
- * LoginActivity handles the login screen for users to authenticate into the app.
- * It validates the user's credentials and allows navigation to either the main app or signup screen.
- *
- * @author Felix Nguyen
- */
 public class LoginActivity extends AppCompatActivity {
 
-    /**
-     * Called when the activity is first created. It sets up the layout, system bar insets,
-     * loads data from DataManager, and configures the login and signup buttons.
-     *
-     * @param savedInstanceState If the activity is being reinitialized after being previously shut down, this contains the data it needs.
-     */
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-
-        // Apply system bar insets for proper padding
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
 
-        // Load all data from DataManager (e.g., users, tasks, etc.)
+        // Load all data here
         DataManager.getInstance().loadAllData(this);
 
-        // Set up the login button click listener
+        // Set up login button
         Button btn_login = findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Set up the signup button click listener
+        // Set up signup button
         TextView txt_signup = findViewById(R.id.txt_signin);
         txt_signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,42 +71,29 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Validates the user's email and password, attempting to log the user in.
-     * If login is successful, the user is directed to the main activity.
-     * If login fails, an error message is shown.
-     */
-    private void login() {
+    private void login(){
         EditText txt_email = findViewById(R.id.txt_email);
         EditText txt_password = findViewById(R.id.txt_password);
 
         String email = txt_email.getText().toString().trim();
         String password = txt_password.getText().toString().trim();
 
-        // Attempt login using UserManager
-        boolean isLoginSuccess = UserManager.getInstance().login(email, password);
+        boolean isLoginSuccess = UserManager.getInstance().login(email,password);
 
-        if (isLoginSuccess) {
-            // If login successful, launch the main activity
+        if(isLoginSuccess){
             launchMainActivity();
-        } else {
-            // Show an error toast if login fails
+        }
+        else{
             Toast.makeText(getApplicationContext(), "Invalid email or password", Toast.LENGTH_SHORT).show();
         }
     }
 
-    /**
-     * Starts the MainActivity, which serves as the landing page after successful login.
-     */
-    private void launchMainActivity() {
+    private void launchMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    /**
-     * Launches the SignupActivity, where new users can create an account.
-     */
-    private void launchSingupActivity() {
+    private void launchSingupActivity(){
         Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }
