@@ -13,23 +13,12 @@ import edu.utsa.cs3443.mealmatch.model.GroceryList;
 import edu.utsa.cs3443.mealmatch.model.MealPlan;
 import edu.utsa.cs3443.mealmatch.model.User;
 
-/**
- * UserManager class manages the current user's session and provides methods for user authentication.
- * It also allows users to add and remove favorite dishes, create meal plans, and manage grocery lists.
- *
- * @author Felix Nguyen
- */
 public class UserManager {
     private static UserManager instance;
     private User user;
 
     private UserManager() {}
 
-    /**
-     * Returns the singleton instance of the UserManager class.
-     *
-     * @return the UserManager instance
-     */
     public static synchronized UserManager getInstance() {
         if (instance == null) {
             instance = new UserManager();
@@ -37,46 +26,26 @@ public class UserManager {
         return instance;
     }
 
-    /**
-     * Sets the current user for the session.
-     *
-     * @param user the user to set
-     */
     public void setUser(User user) {
         this.user = user;
     }
 
-    /**
-     * Returns the current user for the session.
-     *
-     * @return the current user
-     */
     public User getUser() {
         return user;
     }
 
-    /**
-     * Authenticates the user by checking the email and password against the DataManager.
-     * If the user exists, the user is set as the current user.
-     *
-     * @param email the user's email
-     * @param password the user's password
-     * @return true if the user is authenticated, false otherwise
-     */
-    public boolean login(String email, String password){
-        User user = DataManager.getInstance().getUserByEmail(email);
+        public boolean login(String email, String password){
+            User user = DataManager.getInstance().getUserByEmail(email);
 
-        if (user != null && user.getPassword().equals(password)) {
-            // Set the current user if email and password match
-            setUser(user);
-            return true;
+            if (user != null && user.getPassword().equals(password)) {
+                // Set the current user if email and password match
+                setUser(user);
+                return true;
+            }
+
+            return false;
         }
-        return false;
-    }
 
-    /**
-     * Creates a new user account with the provided email, password, first name, and last name.
-     */
     public boolean addNewUser(String email, String password, String firstname, String lastname, Context context){
         // Check if the email already exists in DataManager
         if (DataManager.getInstance().getUserByEmail(email) != null) {
@@ -99,42 +68,19 @@ public class UserManager {
         return true;
     }
 
-    /**
-     * Logs out the current user by setting the user to null.
-     */
     public void logout(){
         this.user = null;
     }
 
-    /**
-     * Adds a dish to the user's favorite dishes list.
-     *
-     * @param id the ID of the dish to add
-     * @param context the application context
-     */
     public void addFavoriteDish(int id, Context context){
         user.getFavoriteDishes().add(id);
         DataManager.getInstance().updateUser(context);
     }
-
-    /**
-     * Removes a dish from the user's favorite dishes list.
-     *
-     * @param id the ID of the dish to remove
-     * @param context the application context
-     */
     public void removeFavoriteDish(int id, Context context){
         user.getFavoriteDishes().remove(Integer.valueOf(id));
         DataManager.getInstance().updateUser(context);
     }
 
-    /**
-     * Adds a dish to the user's meal plan.
-     *
-     * @param dishID the ID of the dish to remove
-     * @param mealPlanID the ID of the meal plan
-     * @param context the application context
-     */
     public void addMealPlan(int dishID, int mealPlanID, Context context) {
         MealPlan mealPlan = DataManager.getInstance().getMealPlanById(mealPlanID);
 
@@ -151,13 +97,6 @@ public class UserManager {
         }
     }
 
-    /**
-     * Removes a dish from the user's meal plan.
-     *
-     * @param dishID the ID of the dish to remove
-     * @param mealPlanID the ID of the meal plan
-     * @param context the application context
-     */
     public void removeDishFromMealPlan(int dishID, int mealPlanID, Context context) {
         // Retrieve the meal plan by its ID
         MealPlan mealPlan = DataManager.getInstance().getMealPlanById(mealPlanID);
