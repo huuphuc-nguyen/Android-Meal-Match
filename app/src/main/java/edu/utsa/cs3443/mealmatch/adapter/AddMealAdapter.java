@@ -1,8 +1,6 @@
 package edu.utsa.cs3443.mealmatch.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +23,7 @@ import edu.utsa.cs3443.mealmatch.model.MealPlan;
  * Adapter class for displaying a list of dishes in a RecyclerView with the option
  * to add or remove a dish from a meal plan.
  *
- * @author Felix Nguyen
+ * @author Issac Caldera
  */
 public class AddMealAdapter extends RecyclerView.Adapter<AddMealAdapter.RecommendDishViewHolder> {
 
