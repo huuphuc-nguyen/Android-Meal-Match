@@ -9,11 +9,22 @@ import okhttp3.*;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Implementation of the Groq API client.
+ * Provides methods for sending chat completion requests asynchronously.
+ *
+ * @author Felix Nguyen
+ */
 public class GroqApiClientImpl implements IGroqApiClient {
 
     private final String apiKey;
     private final OkHttpClient client;
 
+    /**
+     * Constructs a new GroqApiClientImpl with the specified API key.
+     *
+     * @param apiKey the API key to use for authentication
+     */
     public GroqApiClientImpl(String apiKey) {
         this.apiKey = apiKey;
         this.client = new OkHttpClient.Builder()
@@ -23,6 +34,12 @@ public class GroqApiClientImpl implements IGroqApiClient {
                 .build();
     }
 
+    /**
+     * Creates a new chat completion request asynchronously.
+     *
+     * @param request the JSON object representing the chat completion request
+     * @return a Single that emits the JSON object representing the chat completion response
+     */
     @Override
     public Single<JsonObject> createChatCompletionAsync(JsonObject request) {
         RequestBody body = RequestBody.create(request.toString(), MediaType.get("application/json; charset=utf-8"));
@@ -51,6 +68,12 @@ public class GroqApiClientImpl implements IGroqApiClient {
         });
     }
 
+    /**
+     * Creates a new chat completion request as a stream asynchronously.
+     *
+     * @param request the JSON object representing the chat completion request
+     * @return an Observable that emits the JSON object representing the chat completion response
+     */
     @Override
     public Observable<JsonObject> createChatCompletionStreamAsync(JsonObject request) {
         RequestBody body = RequestBody.create(request.toString(), MediaType.get("application/json; charset=utf-8"));
