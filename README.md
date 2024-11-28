@@ -39,12 +39,12 @@ To run the **MealMatch** application successfully, please follow these steps:
 ## ⚠️ Known Issues
 
 **Gradle Version Incompatibility**:
-    - The application was developed using the **Ladybug version** of Android Studio, which requires a newer Gradle version.
-    - Attempting to build the project in the **Koala version** of Android Studio may result in errors due to Gradle version incompatibility.
+- The application was developed using the **Ladybug version** of Android Studio, which requires a newer Gradle version.
+- Attempting to build the project in the **Koala version** of Android Studio may result in errors due to Gradle version incompatibility.
 
-   ### Suggested Fix:
-    - Upgrade to the **Ladybug version** of Android Studio to ensure compatibility with the project's Gradle configuration.
-    - After upgrading, sync the project with Gradle to resolve any dependency issues.
+### Suggested Fix:
+- Upgrade to the **Ladybug version** of Android Studio to ensure compatibility with the project's Gradle configuration.
+- After upgrading, sync the project with Gradle to resolve any dependency issues.
 
 ---
 
