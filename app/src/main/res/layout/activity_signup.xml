@@ -85,9 +85,11 @@
                     android:layout_marginEnd="8dp"
                     android:singleLine="true"
                     android:autofillHints="name"
-                    android:inputType="textPersonName"/>
+                    android:inputType="text"
+                    android:nextFocusForward="@id/txt_lastname"
+                    android:imeOptions="actionNext"/>
 
-                <!-- Firstname Input -->
+                <!-- Lastname Input -->
                 <EditText
                     android:id="@+id/txt_lastname"
                     android:layout_width="0dp"
@@ -101,9 +103,10 @@
                     android:layout_marginBottom="5dp"
                     android:singleLine="true"
                     android:autofillHints="name"
-                    android:inputType="textPersonName"/>
+                    android:inputType="text"
+                    android:nextFocusForward="@id/txt_email"
+                    android:imeOptions="actionNext"/>
             </LinearLayout>
-
 
             <!-- Email Input -->
             <EditText
