@@ -96,15 +96,6 @@ Contributions are welcome! Feel free to submit issues or pull requests to enhanc
 
 ---
 
-## 📧 Contact
-For any inquiries, reach out to me at: 
-- gabriel.reyesfen@my.utsa.edu
-- huuphuc.nguyen@my.utsa.edu
-- ian.rohan@my.utsa.edu
-- issac.caldera@my.utsa.edu
-
----
-
 ## ⭐ Acknowledgements
 - Icons from [FlatIcon](https://www.flaticon.com/) and Images from [Unplash](https://unsplash.com/).
 - Special thanks to [Glide](https://github.com/bumptech/glide) for seamless image handling.
