@@ -135,6 +135,16 @@ public class HorizontalDishAdapter extends RecyclerView.Adapter<HorizontalDishAd
     }
 
     /**
+     * Updates the dish list and associated meal plan data.
+     *
+     * @param newDishes the new list of dishes to display.
+     */
+    public void updateDishes(ArrayList<Dish> newDishes){
+        this.dishesList = newDishes;
+        notifyDataSetChanged();
+    }
+
+    /**
      * Interface for handling dish click events.
      */
     public interface OnDishClickListener {
