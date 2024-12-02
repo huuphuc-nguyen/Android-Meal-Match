@@ -128,6 +128,25 @@ public class FavoriteDishesActivity extends AppCompatActivity {
     }
 
     /**
+     * Update new dishes to display.
+     * This method is called when this activity comes into display.
+     */
+    private void updateDisplayDishes(){
+        favDishes = new ArrayList<>();
+
+        // Fetch user's favorite dish IDs from UserManager and populate the list
+        for (int id : UserManager.getInstance().getUser().getFavoriteDishes()) {
+            // Fetch the dish using its ID from DataManager
+            Dish getDish = DataManager.getInstance().getDishById(id);
+            if (getDish != null) {
+                favDishes.add(getDish);
+            }
+        }
+
+        dishAdapter.updateDishes(favDishes);
+    }
+
+    /**
      * Filters the displayed favorite dishes based on a search term.
      * This method is called after a user enters a search term in the search bar.
      *
@@ -186,5 +205,11 @@ public class FavoriteDishesActivity extends AppCompatActivity {
 
         // Back button to finish the activity and return to the previous screen
         findViewById(R.id.btn_back).setOnClickListener(view -> finish());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateDisplayDishes();
     }
 }

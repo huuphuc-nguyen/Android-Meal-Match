@@ -59,7 +59,6 @@ public class GroceryListActivity extends AppCompatActivity {
             return insets;
         });
 
-
         displayTasks();
 
         addTask();
