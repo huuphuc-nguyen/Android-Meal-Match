@@ -87,7 +87,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 String searchTerm = txtSearch.getText().toString().trim().toLowerCase();
                 if (!searchTerm.isEmpty()) {
                     setTitle(searchTerm);
-                    setSearchDishes(searchTerm);
+                    updateSearchResult(searchTerm);
                 }
                 return true;
             }
@@ -126,6 +126,24 @@ public class SearchResultActivity extends AppCompatActivity {
         TextView txtTitle = findViewById(R.id.txt_search_result_for);
         String title = "Search results for \"" + searchTerm + "\"";
         txtTitle.setText(title);
+    }
+
+    /**
+     * Updates, filters and displays the list of dishes based on the search term. The dishes are displayed in a RecyclerView.
+     *
+     * @param searchTerm The search term used to filter dishes.
+     */
+    private void updateSearchResult(String searchTerm) {
+        ArrayList<Dish> dishData = new ArrayList<>(DataManager.getInstance().getDishes().values());
+        ArrayList<Dish> setList = new ArrayList<>();
+
+        for (Dish dish : dishData) {
+            if (dish.getName().toLowerCase().contains(searchTerm)) {
+                setList.add(dish);
+            }
+        }
+
+        dishAdapter.updateDishes(setList);
     }
 
     /**
