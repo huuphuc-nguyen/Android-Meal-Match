@@ -34,8 +34,20 @@ import edu.utsa.cs3443.mealmatch.model.User;
 import edu.utsa.cs3443.mealmatch.utils.Constant;
 import edu.utsa.cs3443.mealmatch.utils.UserManager;
 
+/**
+ * Activity that allows the user to manage their grocery list by displaying tasks,
+ * adding new tasks, and removing completed tasks.
+ *
+ * @author Felix Nguyen, Ian Rohan
+ */
 public class GroceryListActivity extends AppCompatActivity {
 
+    /**
+     * Initializes the activity and sets up the UI components such as task list display,
+     * task addition, and navigation buttons.
+     *
+     * @param savedInstanceState The saved instance state for the activity.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,14 +59,23 @@ public class GroceryListActivity extends AppCompatActivity {
             return insets;
         });
 
-
         displayTasks();
 
         addTask();
         setupNavigationButtons();
     }
 
-    // Navigation buttons
+    /**
+     * Updates the task list when the activity resumes.
+     */
+    protected void onResume() {
+        super.onResume();
+        displayTasks();
+    }
+
+    /**
+     * Sets up the navigation buttons that allow the user to navigate to different activities.
+     */
     private void setupNavigationButtons() {
         findViewById(R.id.btn_home).setOnClickListener(view -> startActivity(new Intent(GroceryListActivity.this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
         findViewById(R.id.btn_mealPlanner).setOnClickListener(view -> startActivity(new Intent(GroceryListActivity.this, MealPlannerActivity.class).setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)));
@@ -62,6 +83,10 @@ public class GroceryListActivity extends AppCompatActivity {
         findViewById(R.id.btn_back).setOnClickListener(view -> finish());
     }
 
+    /**
+     * Handles adding a new task to the grocery list. It checks whether the task already exists
+     * and adds or updates the task accordingly.
+     */
     private void addTask() {
         EditText txt_taskname = findViewById(R.id.task_name);
         EditText txt_tasktype = findViewById(R.id.task_type);
@@ -106,6 +131,9 @@ public class GroceryListActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Displays the tasks from the user's grocery list in a scrollable list.
+     */
     private void displayTasks() {
         LinearLayout taskList = findViewById(R.id.task_list);
         taskList.removeAllViews(); // Clear any existing views
@@ -147,6 +175,7 @@ public class GroceryListActivity extends AppCompatActivity {
                 taskCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     task.setDone(isChecked);
                     DataManager.getInstance().updateTask(this);
+                    displayTasks();
                 });
 
                 // Create a TextView for the task details

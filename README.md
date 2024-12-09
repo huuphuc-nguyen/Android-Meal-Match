@@ -4,6 +4,50 @@
 
 ---
 
+## 👥 Contributors
+
+This project was developed as part of **CS 3343 - Programming Project 3** under the guidance of **Professor Hend Al-Kittawi**.
+
+A big thanks to the contributors who made **MealMatch** possible:
+
+- **Gabriel Reyesfen** - [gabriel.reyesfen@my.utsa.edu](mailto:gabriel.reyesfen@my.utsa.edu)
+- **Felix Nguyen** - [huuphuc.nguyen@my.utsa.edu](mailto:huuphuc.nguyen@my.utsa.edu)
+- **Ian Rohan** - [ian.rohan@my.utsa.edu](mailto:ian.rohan@my.utsa.edu)
+- **Issac Caldera** - [issac.caldera@my.utsa.edu](mailto:issac.caldera@my.utsa.edu)
+
+---
+
+## 📖 Instructions for Running the Application
+
+To run the **MealMatch** application successfully, please follow these steps:
+
+### Requirements:
+1. **Internet Access**: Required for AI-powered features and fetching recipe data.
+2. **Android Studio**: Ensure you have the **latest version (Ladybug)** installed to avoid compatibility issues.
+
+### Steps:
+1. Clone the repository:
+   ```
+   git clone https://github.com/UTSA-CS-3443/MealMatch.git
+   ```
+2. Open the project in Android Studio Ladybug.
+3. Sync the project to download dependencies and configure Gradle.
+4. Run the application on a device or emulator with internet access.
+
+---
+
+## ⚠️ Known Issues
+
+**Gradle Version Incompatibility**:
+- The application was developed using the **Ladybug version** of Android Studio, which requires a newer Gradle version.
+- Attempting to build the project in the **Koala version** of Android Studio may result in errors due to Gradle version incompatibility.
+
+### Suggested Fix:
+- Upgrade to the **Ladybug version** of Android Studio to ensure compatibility with the project's Gradle configuration.
+- After upgrading, sync the project with Gradle to resolve any dependency issues.
+
+---
+
 ## 📱 Features
 
 - 🍕 **Dynamic Recipe Browsing**: Scroll through beautifully presented dishes with the help of `RecyclerView`.
@@ -44,29 +88,6 @@
 
 ---
 
-## 📂 Manually Add Sample Data
-
-The app requires certain **sample data files** to function properly. Follow these steps to upload the data:
-
-### 1. Locate the `sampledata` Folder
-- After cloning the project, navigate to the `sampledata` folder in your project directory.
-
-### 2. Open Device File Explorer
-- In **Android Studio**, go to **View > Tool Windows > Device File Explorer**.
-
-### 3. Navigate to App's Internal Storage
-- Once the **Device File Explorer** opens, navigate to the app’s internal storage path:
-  ```
-  data/data/edu.utsa.cs3443.mealmatch/files/
-  ```
-### 4. Upload Sample Data
-- Drag and drop the files from the `sampledata` folder into the files directory in the **Device File Explorer**.
-
-### 5. Restart the App
-- Once the files are uploaded, restart the app to ensure the sample data is loaded correctly.
-
----
-
 ## 🔑 How to Get a Groq API Key
 
 To use the AI-powered features in MealMatch, you’ll need a Groq API key. Follow these steps to obtain one:
@@ -93,6 +114,15 @@ To use the AI-powered features in MealMatch, you’ll need a Groq API key. Follo
 
 ## 🤝 Contributing
 Contributions are welcome! Feel free to submit issues or pull requests to enhance the app.
+
+---
+
+## 📧 Contact
+For any inquiries, reach out to us at: 
+- gabriel.reyesfen@my.utsa.edu
+- huuphuc.nguyen@my.utsa.edu
+- ian.rohan@my.utsa.edu
+- issac.caldera@my.utsa.edu
 
 ---
 

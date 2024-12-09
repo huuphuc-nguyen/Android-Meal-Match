@@ -53,7 +53,10 @@
                     android:layout_centerHorizontal="true"/>
                 <EditText
                     android:background="@drawable/txt_grounded"
+                    android:inputType="text"
                     android:id="@+id/txt_search"
+                    android:singleLine="true"
+                    android:imeOptions="actionSearch"
                     android:layout_width="300dp"
                     android:textSize="14sp"
                     android:drawableStart="@drawable/ic_search"
